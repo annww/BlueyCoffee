@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.paint.Color?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.HelloController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.Controller.NhanVienController">
   <children>
     <Text layoutX="150.0" layoutY="70.0" fill="darkblue" strokeType="OUTSIDE" strokeWidth="0.0" text="THÔNG TIN ĐĂNG NHẬP">
       <font>
@@ -27,12 +27,12 @@
     </Text>
     <TextField fx:id="username" layoutX="260.0" layoutY="110.0" prefHeight="30.0" prefWidth="230.0" style="-fx-background-radius: 15; -fx-padding: 5;" />
     <PasswordField fx:id="password" layoutX="260.0" layoutY="190.0" prefHeight="30.0" prefWidth="230.0" style="-fx-background-radius: 15; -fx-padding: 5;" />
-    <Button fx:id="btnreset" layoutX="180.0" layoutY="290.0" mnemonicParsing="false" text="Tạo lại" style="-fx-background-color: lightgrey; -fx-background-radius: 15; -fx-padding: 10; -fx-font-size: 14px;">
+    <Button fx:id="btnreset" layoutX="180.0" layoutY="290.0" mnemonicParsing="false" text="Tạo lại" onAction="#handleReset" style="-fx-background-color: lightgrey; -fx-background-radius: 15; -fx-padding: 10; -fx-font-size: 14px;">
       <font>
         <Font size="14.0" />
       </font>
     </Button>
-    <Button fx:id="btnlogin" layoutX="330.0" layoutY="290.0" mnemonicParsing="false" text="Đăng nhập"  style="-fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 15; -fx-padding: 10; -fx-font-size: 14px;">
+    <Button fx:id="btnlogin" layoutX="330.0" layoutY="290.0" mnemonicParsing="false" text="Đăng nhập" onAction="#handleDangNhap" style="-fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 15; -fx-padding: 10; -fx-font-size: 14px;">
       <font>
         <Font size="14.0" />
       </font>

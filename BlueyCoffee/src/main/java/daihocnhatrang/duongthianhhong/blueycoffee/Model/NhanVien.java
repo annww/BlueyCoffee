@@ -1,14 +1,19 @@
-package daihocnhatrang.duongthianhhong.blueycoffee;
+package daihocnhatrang.duongthianhhong.blueycoffee.Model;
 
-public class Account {
+public class NhanVien {
+  private int id;
   private String name;  // Tên đăng nhập
   private String pass;  // Mật khẩu
 
-  // Constructor
-  public Account(String name, String pass) {
+  public NhanVien(int id, String name, String pass) {
+    this.id = id;
     this.name = name;
     this.pass = pass;
   }
+
+  public int getId() {return id;}
+
+  public void setId(int id) {this.id = id;}
 
   // Getter cho name
   public String getName() {
