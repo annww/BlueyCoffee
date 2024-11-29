@@ -18,6 +18,14 @@ public class NhanVienController {
   @FXML
   private Button btnlogin, btnreset;
   @FXML
+  private TextField fullname;
+  @FXML
+  private TextField email;
+  @FXML
+  private TextField phone;
+  @FXML
+  private Button btnRegister;
+  @FXML
   private Text errorMessage;  // Thêm Text để hiển thị lỗi (nếu có)
 
   private final NhanVienBLL nhanVienBLL;
@@ -64,4 +72,30 @@ public class NhanVienController {
     alert.setContentText(message);
     alert.showAndWait();
   }
+
+  @FXML
+  private void handleRegister() {
+    String usernameText = username.getText();
+    String passwordText = password.getText();
+    String fullNameText = fullname.getText();
+    String emailText = email.getText();
+    String phoneText = phone.getText();
+
+    // Kiểm tra dữ liệu đầu vào (có thể tùy chỉnh thêm)
+    if (usernameText.isEmpty() || passwordText.isEmpty() || fullNameText.isEmpty() || emailText.isEmpty() || phoneText.isEmpty()) {
+      showAlert(Alert.AlertType.ERROR, "Lỗi", "Vui lòng điền đầy đủ thông tin!");
+      return;
+    }
+
+    // Giả lập lưu thông tin (có thể thêm vào database)
+    showAlert(Alert.AlertType.INFORMATION, "Thành công", "Đăng ký thành công!");
+
+    // Reset form sau khi đăng ký
+    username.clear();
+    password.clear();
+    fullname.clear();
+    email.clear();
+    phone.clear();
+  }
+
 }
