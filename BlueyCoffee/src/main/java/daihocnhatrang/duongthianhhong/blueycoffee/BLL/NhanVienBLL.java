@@ -11,21 +11,43 @@ public class NhanVienBLL {
   }
 
   public void addNhanVien(NhanVien nhanVien) throws Exception {
-    // Kiểm tra tính hợp lệ
-    if (nhanVien.getName() == null || nhanVien.getName().isEmpty()) {
+    // Kiểm tra tính hợp lệ của tên đăng nhập
+    if (nhanVien.getUsername() == null || nhanVien.getUsername().isEmpty()) {
       throw new Exception("Tên nhân viên không được để trống.");
     }
-    if (nhanVien.getPass() == null || nhanVien.getPass().isEmpty()) {
+
+    // Kiểm tra tính hợp lệ của mật khẩu
+    if (nhanVien.getPassword() == null || nhanVien.getPassword().isEmpty()) {
       throw new Exception("Mật khẩu không được để trống.");
     }
 
+    // Kiểm tra tính hợp lệ của họ tên
+    if (nhanVien.getFullname() == null || nhanVien.getFullname().isEmpty()) {
+      throw new Exception("Họ tên không được để trống.");
+    }
+
+    // Kiểm tra tính hợp lệ của email
+    if (nhanVien.getEmail() == null || nhanVien.getEmail().isEmpty()) {
+      throw new Exception("Email không được để trống.");
+    } else if (!nhanVien.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+      throw new Exception("Email không hợp lệ.");
+    }
+
+    // Kiểm tra tính hợp lệ của số điện thoại
+    if (nhanVien.getPhone() == null || nhanVien.getPhone().isEmpty()) {
+      throw new Exception("Số điện thoại không được để trống.");
+    } else if (!nhanVien.getPhone().matches("^\\d{10,15}$")) {
+      throw new Exception("Số điện thoại không hợp lệ. Vui lòng nhập từ 10 đến 15 chữ số.");
+    }
+
     // Băm mật khẩu trước khi gửi xuống DAL
-    String hashedPassword = ComonUtils.hashPassword(nhanVien.getPass());
-    nhanVien.setPass(hashedPassword);
+    String hashedPassword = ComonUtils.hashPassword(nhanVien.getPassword());
+    nhanVien.setPassword(hashedPassword);
 
     // Gửi xuống DAL để lưu vào CSDL
     nhanVienDAL.addNhanVien(nhanVien);
   }
+
 
   public boolean checkLogin(String tenDN, String matKhau) throws Exception {
     // Kiểm tra dữ liệu đầu vào

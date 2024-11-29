@@ -11,19 +11,29 @@ import java.sql.SQLException;
 
 public class NhanVienDAL {
   public void addNhanVien(NhanVien nhanVien) throws SQLException, ClassNotFoundException {
-    String sql = "INSERT INTO NhanVien (id, username, password) VALUES (?, ?, ?)";
+    String sql = "INSERT INTO NhanVien (id, username, password, fullname, email, phone) VALUES (?, ?, ?, ?, ?, ?)";
+
+    // Sử dụng try-with-resources để tự động đóng tài nguyên
     try (Connection conn = DSUtils.DBConnect();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+      // Thiết lập các tham số vào câu lệnh PreparedStatement
       stmt.setInt(1, nhanVien.getId());
-      stmt.setString(2, nhanVien.getName());
-      stmt.setString(3, nhanVien.getPass()); // Password đã được băm ở BLL
+      stmt.setString(2, nhanVien.getUsername());
+      stmt.setString(3, nhanVien.getPassword());
+      stmt.setString(4, nhanVien.getFullname());
+      stmt.setString(5, nhanVien.getEmail());
+      stmt.setString(6, nhanVien.getPhone());
 
       stmt.executeUpdate();
-      DSUtils.CloseConnect(conn);
-    }
 
+    } catch (SQLException | ClassNotFoundException e) {
+
+      System.err.println("Lỗi khi thêm nhân viên: " + e.getMessage());
+      throw e;
+    }
   }
+
   public boolean Delete(int id){
     return true;
   }
