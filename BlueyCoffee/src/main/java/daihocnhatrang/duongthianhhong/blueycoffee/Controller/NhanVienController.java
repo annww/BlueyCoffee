@@ -39,24 +39,40 @@ public class NhanVienController {
   }
 
   @FXML
-  private void handleDangNhap() {
-    String username = this.username.getText();
-    String password = this.password.getText();
+  private void handleDangNhap(ActionEvent event) {
+    // Lấy dữ liệu từ các trường nhập liệu
+    String inputUsername = username.getText().trim();
+    String inputPassword = password.getText().trim();
+
+    // Kiểm tra nếu các trường nhập liệu trống
+    if (inputUsername.isEmpty() || inputPassword.isEmpty()) {
+      errorMessage.setText("Vui lòng điền đầy đủ tên đăng nhập và mật khẩu!");
+      errorMessage.setVisible(true);
+      return;
+    }
 
     try {
-      boolean isLoggedIn = nhanVienBLL.checkLogin(username, password);
+      // Kiểm tra đăng nhập thông qua lớp BLL
+      boolean isLoggedIn = nhanVienBLL.checkLogin(inputUsername, inputPassword);
+
       if (isLoggedIn) {
+        // Đăng nhập thành công, chuyển đến giao diện chính
+        loadFXML("/resources/stranglehold/duongthianhhong/blueycoffee/trangchu.fxml", event);
         System.out.println("Đăng nhập thành công!");
-        // Có thể chuyển cảnh hoặc làm gì đó khác sau khi đăng nhập thành công
       } else {
+        // Hiển thị lỗi nếu đăng nhập thất bại
         errorMessage.setText("Tên đăng nhập hoặc mật khẩu không đúng!");
         errorMessage.setVisible(true);
       }
     } catch (Exception e) {
-      errorMessage.setText(e.getMessage());
+      // Hiển thị thông báo lỗi khi gặp ngoại lệ
+      errorMessage.setText("Có lỗi xảy ra: " + e.getMessage());
       errorMessage.setVisible(true);
+      e.printStackTrace();
     }
   }
+
+
 
   @FXML
   private void handleReset() {

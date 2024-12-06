@@ -11,18 +11,16 @@ import java.sql.SQLException;
 
 public class NhanVienDAL {
   public void addNhanVien(NhanVien nhanVien) throws SQLException, ClassNotFoundException {
-    String sql = "INSERT INTO NhanVien (id, username, password, fullname, email, phone) VALUES (?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO nhanvien (fullname, email, phone, username, password) VALUES (?, ?, ?, ?, ?, ?)";
 
     try (Connection conn = DSUtils.DBConnect();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-      stmt.setInt(1, nhanVien.getId());
-      stmt.setString(2, nhanVien.getUsername());
-      stmt.setString(3, nhanVien.getPassword());
-      stmt.setString(4, nhanVien.getFullname());
-      stmt.setString(5, nhanVien.getEmail());
-      stmt.setString(6, nhanVien.getPhone());
-
+      stmt.setString(1, nhanVien.getFullname());
+      stmt.setString(2, nhanVien.getEmail());
+      stmt.setString(3, nhanVien.getPhone());
+      stmt.setString(4, nhanVien.getUsername());
+      stmt.setString(5, nhanVien.getPassword());
       stmt.executeUpdate();
 
     } catch (SQLException | ClassNotFoundException e) {
@@ -37,7 +35,7 @@ public class NhanVienDAL {
   }
 
   public boolean Login(String username, String hashedPassword) throws Exception {
-    String sql = "SELECT COUNT(*) FROM NhanVien WHERE username = ? AND password = ?";
+    String sql = "SELECT COUNT(*) FROM nhanvien WHERE username = ? AND password = ?";
     try (Connection conn = DSUtils.DBConnect();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -46,7 +44,7 @@ public class NhanVienDAL {
 
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
-          return rs.getInt(1) > 0; // Trả về true nếu có ít nhất một bản ghi
+          return rs.getInt(1) > 0;
         }
       }
     } catch (Exception e) {

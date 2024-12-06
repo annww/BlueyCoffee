@@ -14,7 +14,6 @@
 <AnchorPane prefHeight="788.0" prefWidth="976.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.Controller.TrangChuController">
     <children>
         <HBox layoutX="-1.0" layoutY="-1.0" prefHeight="790.0" prefWidth="978.0" spacing="10.0">
-            <!-- Left Panel with Buttons -->
             <VBox alignment="CENTER" prefHeight="790.0" prefWidth="314.0" spacing="10.0" style="-fx-background-color: #f0f0f0;">
                 <ImageView fitHeight="71.0" fitWidth="130.0">
                     <Image url="@blueylogo.png" />
@@ -36,8 +35,6 @@
                         <Insets top="70.0" />
                     </VBox.margin></Button>
             </VBox>
-
-            <!-- Right Panel to Display Content -->
             <StackPane fx:id="contentPane" prefHeight="790.0" prefWidth="790.0" style="-fx-background-color: #ffffff;" />
         </HBox>
     </children>
