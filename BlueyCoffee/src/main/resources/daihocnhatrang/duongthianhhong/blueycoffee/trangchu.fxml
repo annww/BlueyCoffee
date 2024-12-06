@@ -1,50 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.TrangChu">
-    <!-- Thanh menu phía trên -->
-    <top>
-        <MenuBar>
-            <Menu text="Hệ Thống">
-                <MenuItem text="Đăng xuất" onAction="#handleLogout"/>
-                <MenuItem text="Thoát" onAction="#handleExit"/>
-            </Menu>
-            <Menu text="Chức Năng">
-                <MenuItem text="Quản lý nhân viên" onAction="#handleManageEmployees"/>
-                <MenuItem text="Quản lý sản phẩm" onAction="#handleManageProducts"/>
-                <MenuItem text="Báo cáo doanh thu" onAction="#handleViewReports"/>
-            </Menu>
-            <Menu text="Trợ Giúp">
-                <MenuItem text="Hướng dẫn sử dụng" onAction="#handleHelp"/>
-                <MenuItem text="Thông tin phần mềm" onAction="#handleAbout"/>
-            </Menu>
-        </MenuBar>
-    </top>
+<AnchorPane prefHeight="788.0" prefWidth="976.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.Controller.TrangChuController">
+    <children>
+        <HBox layoutX="-1.0" layoutY="-1.0" prefHeight="790.0" prefWidth="978.0" spacing="10.0">
+            <!-- Left Panel with Buttons -->
+            <VBox alignment="CENTER" prefHeight="790.0" prefWidth="314.0" spacing="10.0" style="-fx-background-color: #f0f0f0;">
+                <ImageView fitHeight="71.0" fitWidth="130.0">
+                    <Image url="@blueylogo.png" />
+                </ImageView>
+                <Text fill="#88c0e8" strokeType="OUTSIDE" strokeWidth="0.0" text="Bluey Coffee" textAlignment="CENTER" wrappingWidth="176.66204833984375">
+                    <font>
+                        <Font name="Sora Regular" size="27.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Text>
+                <Button fx:id="btnManageOrders" prefHeight="100.0" prefWidth="140" style="-fx-background-color: #88C0E8;" text="Trang Chủ" />
+                <Button fx:id="btnManageProducts" prefHeight="100.0" prefWidth="140" style="-fx-background-color: #88C0E8;" text="Quản Lý Sản Phẩm" />
+                <Button fx:id="btnManageCustomers" prefHeight="100.0" prefWidth="140" style="-fx-background-color: #88C0E8;" text="Quản Lý Khách Hàng" />
+                <Button fx:id="btnManageOrders1" prefHeight="100.0" prefWidth="140" style="-fx-background-color: #88C0E8;" text="Quản Lý Đơn Hàng" />
+                <Button fx:id="btnExit" prefWidth="140" style="-fx-background-color: #ff4d4d; -fx-text-fill: white;" text="Đăng xuất">
+                    <VBox.margin>
+                        <Insets top="70.0" />
+                    </VBox.margin></Button>
+            </VBox>
 
-    <!-- Khu vực trung tâm -->
-    <center>
-        <VBox spacing="10" alignment="TOP_CENTER">
-            <Label text="Quản Lý Quán Coffee" />
-            <TableView fx:id="tableView">
-                <columns>
-                    <TableColumn text="ID" fx:id="colId"/>
-                    <TableColumn text="Tên Sản Phẩm" fx:id="colProductName"/>
-                    <TableColumn text="Giá" fx:id="colPrice"/>
-                    <TableColumn text="Số Lượng" fx:id="colQuantity"/>
-                </columns>
-            </TableView>
-        </VBox>
-    </center>
-
-    <!-- Thanh công cụ phía dưới -->
-    <bottom>
-        <HBox alignment="CENTER" spacing="15" padding="10">
-            <Button text="Thêm" onAction="#handleAdd" prefWidth="100"/>
-            <Button text="Sửa" onAction="#handleEdit" prefWidth="100"/>
-            <Button text="Xóa" onAction="#handleDelete" prefWidth="100"/>
+            <!-- Right Panel to Display Content -->
+            <StackPane fx:id="contentPane" prefHeight="790.0" prefWidth="790.0" style="-fx-background-color: #ffffff;" />
         </HBox>
-    </bottom>
-</BorderPane>
+    </children>
+</AnchorPane>

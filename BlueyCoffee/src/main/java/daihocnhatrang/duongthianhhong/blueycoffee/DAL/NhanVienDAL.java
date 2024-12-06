@@ -13,11 +13,9 @@ public class NhanVienDAL {
   public void addNhanVien(NhanVien nhanVien) throws SQLException, ClassNotFoundException {
     String sql = "INSERT INTO NhanVien (id, username, password, fullname, email, phone) VALUES (?, ?, ?, ?, ?, ?)";
 
-    // Sử dụng try-with-resources để tự động đóng tài nguyên
     try (Connection conn = DSUtils.DBConnect();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-      // Thiết lập các tham số vào câu lệnh PreparedStatement
       stmt.setInt(1, nhanVien.getId());
       stmt.setString(2, nhanVien.getUsername());
       stmt.setString(3, nhanVien.getPassword());
