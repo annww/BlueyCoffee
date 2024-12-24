@@ -1,7 +1,7 @@
 package daihocnhatrang.duongthianhhong.blueycoffee.BLL;
 
 import daihocnhatrang.duongthianhhong.blueycoffee.DAL.NhanVienDAL;
-import daihocnhatrang.duongthianhhong.blueycoffee.Model.NhanVien;
+import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.NhanVien;
 import daihocnhatrang.duongthianhhong.blueycoffee.Utils.ComonUtils;
 public class NhanVienBLL {
   NhanVienDAL nhanVienDAL;

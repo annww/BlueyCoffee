@@ -1,7 +1,7 @@
 package daihocnhatrang.duongthianhhong.blueycoffee.DAL;
 
 
-import daihocnhatrang.duongthianhhong.blueycoffee.Model.NhanVien;
+import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.NhanVien;
 import daihocnhatrang.duongthianhhong.blueycoffee.Utils.DSUtils;
 
 import java.sql.Connection;
@@ -13,7 +13,7 @@ public class NhanVienDAL {
   public void addNhanVien(NhanVien nhanVien) throws SQLException, ClassNotFoundException {
     String sql = "INSERT INTO nhanvien (fullname, email, phone, username, password) VALUES (?, ?, ?, ?, ?, ?)";
 
-    try (Connection conn = DSUtils.DBConnect();
+    try (Connection conn = DSUtils.openConnection();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
 
       stmt.setString(1, nhanVien.getFullname());
@@ -23,7 +23,7 @@ public class NhanVienDAL {
       stmt.setString(5, nhanVien.getPassword());
       stmt.executeUpdate();
 
-    } catch (SQLException | ClassNotFoundException e) {
+    } catch (SQLException e) {
 
       System.err.println("Lỗi khi thêm nhân viên: " + e.getMessage());
       throw e;
@@ -36,7 +36,7 @@ public class NhanVienDAL {
 
   public boolean Login(String username, String hashedPassword) throws Exception {
     String sql = "SELECT COUNT(*) FROM nhanvien WHERE username = ? AND password = ?";
-    try (Connection conn = DSUtils.DBConnect();
+    try (Connection conn = DSUtils.openConnection();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
 
       stmt.setString(1, username);

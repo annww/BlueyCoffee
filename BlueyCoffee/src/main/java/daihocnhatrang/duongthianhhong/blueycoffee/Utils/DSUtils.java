@@ -5,13 +5,34 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DSUtils {
-  static public Connection DBConnect() throws ClassNotFoundException, SQLException {
-    Class.forName("com.mysql.jdbc.Driver");
-    String strConn = "jdbc:mysql://localhost:3306/blueycoffee";
-    Connection conn = DriverManager.getConnection(strConn, "root", "");
-    return conn;
+  public static Connection openConnection() {
+    Connection con = null;
+    try {
+      // Đăng ký driver
+      Class.forName("com.mysql.cj.jdbc.Driver");
+      // Chuẩn bị chuỗi kết nối
+      String connectionURL = "jdbc:mysql://localhost:3306/blueycoffee";
+      // Mở kết nối
+      con = DriverManager.getConnection(connectionURL, "root", "");
+      System.out.println("Connection successful!");
+    } catch (ClassNotFoundException e) {
+      System.out.println("MySQL Driver not found!");
+      e.printStackTrace();
+    } catch (SQLException e) {
+      System.out.println("Connection failed!");
+      e.printStackTrace();
+    }
+    return con;
   }
-  static public void CloseConnect(Connection connection) throws SQLException {
-    connection.close();
+  public static void closeConnection(Connection con) {
+    if (con != null) {
+      try {
+        con.close();
+        System.out.println("Connection closed!");
+      } catch (SQLException e) {
+        System.out.println("Failed to close connection!");
+        e.printStackTrace();
+      }
+    }
   }
-}
+  }

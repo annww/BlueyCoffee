@@ -1,14 +1,20 @@
 package daihocnhatrang.duongthianhhong.blueycoffee.Controller;
 
 import daihocnhatrang.duongthianhhong.blueycoffee.BLL.NhanVienBLL;
-import daihocnhatrang.duongthianhhong.blueycoffee.Model.NhanVien;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+
+import java.io.IOException;
 
 public class NhanVienController {
   @FXML
@@ -35,16 +41,13 @@ public class NhanVienController {
   }
 
   public void initialize() {
-    // Thiết lập ban đầu nếu cần
   }
 
   @FXML
   private void handleDangNhap(ActionEvent event) {
-    // Lấy dữ liệu từ các trường nhập liệu
     String inputUsername = username.getText().trim();
     String inputPassword = password.getText().trim();
 
-    // Kiểm tra nếu các trường nhập liệu trống
     if (inputUsername.isEmpty() || inputPassword.isEmpty()) {
       errorMessage.setText("Vui lòng điền đầy đủ tên đăng nhập và mật khẩu!");
       errorMessage.setVisible(true);
@@ -56,29 +59,36 @@ public class NhanVienController {
       boolean isLoggedIn = nhanVienBLL.checkLogin(inputUsername, inputPassword);
 
       if (isLoggedIn) {
-        // Đăng nhập thành công, chuyển đến giao diện chính
         loadFXML("/resources/stranglehold/duongthianhhong/blueycoffee/trangchu.fxml", event);
         System.out.println("Đăng nhập thành công!");
       } else {
-        // Hiển thị lỗi nếu đăng nhập thất bại
         errorMessage.setText("Tên đăng nhập hoặc mật khẩu không đúng!");
         errorMessage.setVisible(true);
       }
     } catch (Exception e) {
-      // Hiển thị thông báo lỗi khi gặp ngoại lệ
       errorMessage.setText("Có lỗi xảy ra: " + e.getMessage());
       errorMessage.setVisible(true);
       e.printStackTrace();
     }
   }
 
-
-
   @FXML
   private void handleReset() {
     username.clear();
     password.clear();
-    errorMessage.setVisible(false);  // Ẩn thông báo lỗi khi người dùng nhấn nút Tạo lại
+    errorMessage.setVisible(false);
+  }
+
+  private void loadFXML(String fxmlPath, ActionEvent event) throws IOException {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
+    Parent root = fxmlLoader.load();
+
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+    stage.setScene(new Scene(root));
+    stage.setResizable(true);
+    stage.centerOnScreen();
+    stage.show();
   }
 
   private void showAlert(Alert.AlertType alertType, String title, String message) {
@@ -90,28 +100,14 @@ public class NhanVienController {
   }
 
   @FXML
-  private void handleRegister() {
-    String usernameText = username.getText();
-    String passwordText = password.getText();
-    String fullNameText = fullname.getText();
-    String emailText = email.getText();
-    String phoneText = phone.getText();
-
-    // Kiểm tra dữ liệu đầu vào (có thể tùy chỉnh thêm)
-    if (usernameText.isEmpty() || passwordText.isEmpty() || fullNameText.isEmpty() || emailText.isEmpty() || phoneText.isEmpty()) {
-      showAlert(Alert.AlertType.ERROR, "Lỗi", "Vui lòng điền đầy đủ thông tin!");
-      return;
+  private void handleDangKy(ActionEvent event) {
+    try {
+      loadFXML("/resources/daihocnhatrang/duongthianhhong/blueycoffee/signup.fxml", event);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-
-    // Giả lập lưu thông tin (có thể thêm vào database)
-    showAlert(Alert.AlertType.INFORMATION, "Thành công", "Đăng ký thành công!");
-
-    // Reset form sau khi đăng ký
-    username.clear();
-    password.clear();
-    fullname.clear();
-    email.clear();
-    phone.clear();
   }
+
+
 
 }

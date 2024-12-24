@@ -1,4 +1,4 @@
-package daihocnhatrang.duongthianhhong.blueycoffee.Model;
+package daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities;
 
 public class NhanVien {
   private int id;
