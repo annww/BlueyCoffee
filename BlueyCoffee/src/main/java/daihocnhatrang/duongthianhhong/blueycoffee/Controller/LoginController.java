@@ -47,14 +47,24 @@ import java.sql.*;
       Statement lenh = conn.createStatement();
       ResultSet ketQua = lenh.executeQuery(sqlSelect);
       boolean check = false;
-      while(ketQua.next()) {
 
-        if(account.equals(ketQua.getString("username"))&&
-            ComonUtils.hashPassword(password).equals(ketQua.getString("password")))
-        {
+      while (ketQua.next()) {
+        if (account.equals(ketQua.getString("username")) &&
+            ComonUtils.hashPassword(password).equals(ketQua.getString("password"))) {
+
           Current_data.username = ketQua.getString("tenNV");
-          Current_data.chucVu = ketQua.getString("chucVu");
           Current_data.userid = ketQua.getString("maNV");
+          String maChucVu = ketQua.getString("chucVu");
+
+          // Truy vấn loại chức vụ từ bảng chucvu
+          String sqlSelectCV = "SELECT loaiChucVu FROM chucvu WHERE maCV = ?";
+          PreparedStatement prepare = conn.prepareStatement(sqlSelectCV);
+          prepare.setString(1, maChucVu);
+          ResultSet chucVuKetQua = prepare.executeQuery();
+
+          if (chucVuKetQua.next()) {
+            Current_data.chucVu = chucVuKetQua.getString("loaiChucVu");
+          }
 
           showAlert(Alert.AlertType.INFORMATION, "Thành công", "Đăng nhập thành công!");
           switchToHomeScreen();
@@ -62,10 +72,12 @@ import java.sql.*;
           break;
         }
       }
-      if(!check){
+
+      if (!check) {
         showAlert(Alert.AlertType.ERROR, "Lỗi đăng nhập", "Tên đăng nhập hoặc mật khẩu không đúng!");
         System.out.println("Đăng nhập không thành công");
       }
+
       DSUtils.closeConnection(conn);
     }
 
@@ -81,7 +93,7 @@ import java.sql.*;
       try {
         StackPane stackPane = new StackPane();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/daihocnhatrang/duongthianhhong/blueycoffee/homeScreen.fxml"));
-//        fxmlLoader.setRoot(stackPane);
+        fxmlLoader.setRoot(stackPane);
         Scene scene = new Scene(fxmlLoader.load());
 
         // Lấy Stage hiện tại
