@@ -4,6 +4,7 @@ module daihocnhatrang.duongthianhhong.blueycoffee {
   requires java.sql;
   requires mysql.connector.j;
 
+  opens daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities to javafx.base;
   opens daihocnhatrang.duongthianhhong.blueycoffee to javafx.fxml;
   opens daihocnhatrang.duongthianhhong.blueycoffee.Controller to javafx.fxml;
 

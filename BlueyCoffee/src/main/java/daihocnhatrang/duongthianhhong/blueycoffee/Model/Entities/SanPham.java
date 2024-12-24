@@ -1,5 +1,7 @@
 package daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities;
 
+import java.sql.Timestamp;
+
 public class SanPham {
   private String maSP, tenSP, loaiSP, anhSP, moTa, ghiChu, trangThai;
   private int donGia;
@@ -15,13 +17,7 @@ public class SanPham {
     this.donGia = donGia;
   }
 
-  public SanPham(String maSP, String tenSP, String anhSP, int donGia, String loaiSP) {
-    this.maSP = maSP;
-    this.tenSP = tenSP;
-    this.anhSP = anhSP;
-    this.donGia = donGia;
-    this.loaiSP = loaiSP;
-  }
+
 
   public String getMaSP() {
     return maSP;
