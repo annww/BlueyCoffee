@@ -6,9 +6,65 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.Controller.ThongKeController"
             prefHeight="400.0" prefWidth="600.0">
-
+    <children>
+        <AnchorPane layoutX="15.2" layoutY="14.0" prefHeight="194.0" prefWidth="830.0" style="-fx-background-radius: 8px; -fx-background-color: white;" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="14.0">
+            <children>
+                <ScrollPane layoutX="-20.0" layoutY="-14.0" prefHeight="283.0" prefWidth="830.0" styleClass="transparent" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                        <AnchorPane prefHeight="178.0" prefWidth="1800.0" styleClass="transparent" stylesheets="@../css/admin.css">
+                            <children>
+                                <AnchorPane layoutX="13.0" layoutY="10.0" prefHeight="158.0" prefWidth="274.0" styleClass="nav-button-choose" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
+                                    <children>
+                                        <ImageView fitHeight="66.0" fitWidth="81.0" layoutX="14.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../img/cloud-solid.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label layoutX="115.0" layoutY="109.0" text="Tổng hóa đơn" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane layoutX="300.0" layoutY="10.0" prefHeight="158.0" prefWidth="274.0" styleClass="nav-button-choose" stylesheets="@../css/admin.css">
+                                    <children>
+                                        <ImageView fitHeight="66.0" fitWidth="81.0" layoutX="14.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../img/cloud-solid.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label layoutX="115.0" layoutY="109.0" text="Tổng hóa đơn" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane layoutX="586.0" layoutY="10.0" prefHeight="158.0" prefWidth="274.0" styleClass="nav-button-choose" stylesheets="@../css/admin.css">
+                                    <children>
+                                        <ImageView fitHeight="66.0" fitWidth="81.0" layoutX="14.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../img/cloud-solid.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label layoutX="115.0" layoutY="109.0" text="Tổng hóa đơn" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane layoutX="873.0" layoutY="10.0" prefHeight="158.0" prefWidth="274.0" styleClass="nav-button-choose" stylesheets="@../css/admin.css">
+                                    <children>
+                                        <ImageView fitHeight="66.0" fitWidth="81.0" layoutX="14.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../img/cloud-solid.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label layoutX="115.0" layoutY="109.0" text="Tổng hóa đơn" />
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+            </children></AnchorPane>
+        <AnchorPane layoutX="15.2" layoutY="218.4" prefHeight="392.0" prefWidth="830.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="218.0" />
+        <Separator layoutX="52.0" layoutY="212.0" prefHeight="1.0" prefWidth="829.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+    </children>
 </AnchorPane>

@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,8 +18,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" type="StackPane" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.Controller.HomeController">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="1100.0" type="StackPane" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.Controller.HomeController">
    <children>
       <AnchorPane fx:id="homeScreen" prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -44,11 +52,26 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="btnBanHang" onAction="#setBtnBanHang" mnemonicParsing="false" prefHeight="135.0" prefWidth="240.0" text="Bán hàng" />
-                                    <Button fx:id="btnHoaDon" onAction="#setBtnHoaDon" mnemonicParsing="false" prefHeight="234.0" prefWidth="269.0" text="Hóa đơn" GridPane.rowIndex="2" />
-                                    <Button fx:id="btnSanPham" onAction="#setBtnSanPham" mnemonicParsing="false" prefHeight="158.0" prefWidth="286.0" text="Sản phẩm" GridPane.rowIndex="4" />
-                                    <Button fx:id="btnNhanVien" onAction="#setBtnNhanVien" mnemonicParsing="false" prefHeight="240.0" prefWidth="247.0" text="Nhân viên" GridPane.rowIndex="1" />
-                                    <Button fx:id="btnThongKe" onAction="#setBtnThongKe" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" prefHeight="234.0" prefWidth="269.0" text="Thống kê" GridPane.rowIndex="3" />
+                                    <Button fx:id="btnBanHang" mnemonicParsing="false" onAction="#setBtnBanHang" prefHeight="135.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@../css/admin.css" text="Bán hàng">
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </GridPane.margin></Button>
+                                    <Button fx:id="btnHoaDon" mnemonicParsing="false" onAction="#setBtnHoaDon" prefHeight="234.0" prefWidth="269.0" styleClass="nav-button" stylesheets="@../css/admin.css" text="Hóa đơn" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </GridPane.margin></Button>
+                                    <Button fx:id="btnSanPham" mnemonicParsing="false" onAction="#setBtnSanPham" prefHeight="158.0" prefWidth="286.0" styleClass="nav-button" stylesheets="@../css/admin.css" text="Sản phẩm" GridPane.rowIndex="4">
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </GridPane.margin></Button>
+                                    <Button fx:id="btnNhanVien" mnemonicParsing="false" onAction="#setBtnNhanVien" prefHeight="240.0" prefWidth="247.0" styleClass="nav-button" stylesheets="@../css/admin.css" text="Nhân viên" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </GridPane.margin></Button>
+                                    <Button fx:id="btnThongKe" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" onAction="#setBtnThongKe" prefHeight="234.0" prefWidth="269.0" styleClass="nav-button" stylesheets="@../css/admin.css" text="Thống kê" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </GridPane.margin></Button>
                                  </children>
                               </GridPane>
                            </children>
@@ -61,16 +84,20 @@
                      <children>
                         <AnchorPane prefHeight="36.0" prefWidth="860.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ImageView fx:id="imgUser" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0" />
-                              <Label fx:id="replaceName" layoutX="45.0" layoutY="9.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="59.0" AnchorPane.topAnchor="9.0" />
+                              <ImageView fx:id="imgUser" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0">
+                                 <image>
+                                    <Image url="@../img/an.jpg" />
+                                 </image></ImageView>
+                              <Label fx:id="replaceName" layoutX="45.0" layoutY="9.0" text="Duong Thi Anh Hong" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="59.0" AnchorPane.topAnchor="9.0" />
                               <Hyperlink fx:id="logOut" layoutX="637.0" layoutY="14.0" onAction="#logout" text="Đăng xuất" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="9.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="banHangform" layoutY="42.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
-                        <AnchorPane fx:id="nhanVienform" layoutX="10.0" layoutY="46.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
-                        <AnchorPane fx:id="hoaDonform" layoutX="20.0" layoutY="56.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
-                        <AnchorPane fx:id="thongKeForm" layoutX="30.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
-                        <AnchorPane fx:id="sanPhamform" layoutX="10.0" layoutY="46.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
+                        <AnchorPane fx:id="nhanVienform" disable="true" layoutX="10.0" layoutY="46.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
+                        <AnchorPane fx:id="hoaDonform" disable="true" layoutX="20.0" layoutY="56.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
+                        <AnchorPane fx:id="thongKeForm" disable="true" layoutX="30.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
+                        <AnchorPane fx:id="sanPhamform" layoutX="10.0" layoutY="46.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
+                           </AnchorPane>
                      </children>
                   </AnchorPane>
                </center>
