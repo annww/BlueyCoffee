@@ -92,7 +92,7 @@ import java.sql.*;
     private void switchToHomeScreen() {
       try {
         StackPane stackPane = new StackPane();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/daihocnhatrang/duongthianhhong/blueycoffee/homeScreen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/daihocnhatrang/duongthianhhong/blueycoffee/fxml/homeScreen.fxml"));
         fxmlLoader.setRoot(stackPane);
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -109,7 +109,7 @@ import java.sql.*;
 
     public void handleSignUp(ActionEvent event) {
       try {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/daihocnhatrang/duongthianhhong/blueycoffee/signup.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/daihocnhatrang/duongthianhhong/blueycoffee/fxml/signup.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
 

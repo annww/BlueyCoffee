@@ -15,7 +15,7 @@
       <AnchorPane prefHeight="602.0" prefWidth="606.0">
          <children>
             <ImageView fitHeight="600.0" fitWidth="302.0" layoutY="1.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.17739868164062">
-              <Image url="@bluey.jpg" />
+              <Image url="@../img/bluey.jpg" />
             </ImageView>
             <Text layoutX="87.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tạo tài khoản mới">
                <font>

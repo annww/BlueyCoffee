@@ -1,5 +1,4 @@
 package daihocnhatrang.duongthianhhong.blueycoffee.Controller;
 
-public class TrangChuController {
-
+public class HoaDonController {
 }
