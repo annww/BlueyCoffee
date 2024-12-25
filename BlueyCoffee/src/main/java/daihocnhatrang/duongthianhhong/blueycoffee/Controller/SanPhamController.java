@@ -131,7 +131,7 @@ public class SanPhamController implements Initializable {
     }
   }
 
-  public void showSPList(String sql){
+  public void showSPList(String sql) {
     sanPhams = getSPList(sql);
     colMaSP.setCellValueFactory(new PropertyValueFactory<>("maSP"));
     colTenSP.setCellValueFactory(new PropertyValueFactory<>("tenSP"));
@@ -152,7 +152,7 @@ public class SanPhamController implements Initializable {
     tableSP.setItems(sanPhams);
   }
 
-  public ObservableList<SanPham> getSPList(String sql){
+  public ObservableList<SanPham> getSPList(String sql) {
     ObservableList<SanPham> spList = FXCollections.observableArrayList();
     conn = DBUtils.openConnection();
     String sqlSelect = sql;
@@ -160,7 +160,7 @@ public class SanPhamController implements Initializable {
       prepare = conn.prepareStatement(sqlSelect);
       result = prepare.executeQuery(sqlSelect);
       SanPham sp;
-      while(result.next()){
+      while (result.next()) {
         sp = new SanPham(
             result.getString("maSP"),
             result.getNString("tenSP"),
@@ -168,7 +168,7 @@ public class SanPhamController implements Initializable {
             result.getString("anhSP"),
             result.getNString("moTa"),
             result.getNString("ghiChu"),
-            result.getBoolean("trangThai")?"Đang bán":"Ngừng bán",
+            result.getBoolean("trangThai") ? "Đang bán" : "Ngừng bán",
             result.getInt("donGia")
         );
         spList.add(sp);
@@ -181,14 +181,14 @@ public class SanPhamController implements Initializable {
     return spList;
   }
 
-  private void getSPFromDB()  {
+  private void getSPFromDB() {
     conn = DBUtils.openConnection();
     String sqlSelect = "SELECT * FROM loaisp";
     Statement lenh = null;
     try {
       lenh = conn.createStatement();
       ResultSet ketQua = lenh.executeQuery(sqlSelect);
-      while(ketQua.next()){
+      while (ketQua.next()) {
         String maLoai = ketQua.getString("maLSP");
         String tenLoai = ketQua.getString("tenLSP");
         loaisps.put(maLoai, tenLoai);
@@ -203,9 +203,9 @@ public class SanPhamController implements Initializable {
     DBUtils.closeConnection(conn);
   }
 
-  private void getTrangThai(){
+  private void getTrangThai() {
     List<String> listTT = new ArrayList<>();
-    for(String trangthai : trangthaisps){
+    for (String trangthai : trangthaisps) {
       listTT.add(trangthai);
     }
     ObservableList list = FXCollections.observableArrayList(listTT);
@@ -213,7 +213,7 @@ public class SanPhamController implements Initializable {
     trangThai.getSelectionModel().select(0);
   }
 
-  public void reloadSP(){
+  public void reloadSP() {
     maSP.setText("");
     tenSP.setText("");
     donGia.setText("");
@@ -225,12 +225,11 @@ public class SanPhamController implements Initializable {
   }
 
 
-
-  public void importImage(){
+  public void importImage() {
     FileChooser openFile = new FileChooser();
     openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File", "*png", "*jpg"));
     File file = openFile.showOpenDialog(sanPham.getScene().getWindow());
-    if(file != null){
+    if (file != null) {
       Current_data.path = file.getAbsolutePath();
       Image imgage = new Image(file.toURI().toString(), 113, 125, false, true);
       img.setImage(imgage);
@@ -238,7 +237,7 @@ public class SanPhamController implements Initializable {
   }
 
 
-  private String setMaSP(ComboBox<String> loaiSP){
+  private String setMaSP(ComboBox<String> loaiSP) {
     String getMaLSP = getMaLSP(this.loaiSP);
     conn = DBUtils.openConnection();
     String sqlSelect = "SELECT maSP FROM sanpham WHERE loaiSP LIKE ? ORDER BY maSP DESC LIMIT 1";
@@ -260,10 +259,10 @@ public class SanPhamController implements Initializable {
     }
   }
 
-  private String getMaLSP(ComboBox<String> cbb){
+  private String getMaLSP(ComboBox<String> cbb) {
     String maLSP = null;
-    for(String key : loaisps.keySet()){
-      if(loaisps.get(key) == cbb.getSelectionModel().getSelectedItem()){
+    for (String key : loaisps.keySet()) {
+      if (loaisps.get(key) == cbb.getSelectionModel().getSelectedItem()) {
         maLSP = key;
         return maLSP;
       }
@@ -273,7 +272,7 @@ public class SanPhamController implements Initializable {
   }
 
   // hien thi thong bao
-  private Optional<ButtonType> setAlert(Alert.AlertType alertType, String title, String message){
+  private Optional<ButtonType> setAlert(Alert.AlertType alertType, String title, String message) {
     alert = new Alert(alertType);
     alert.setTitle(title);
     alert.setHeaderText("");
@@ -281,15 +280,14 @@ public class SanPhamController implements Initializable {
     return alert.showAndWait();
   }
 
-  public void addSP(){
-    if(tenSP.getText().isEmpty()
+  public void addSP() {
+    if (tenSP.getText().isEmpty()
         || donGia.getText().isEmpty()
         || loaiSP.getSelectionModel().getSelectedItem() == null
         || trangThai.getSelectionModel().getSelectedItem() == null
-    ){
-      setAlert(Alert.AlertType.ERROR,"Lỗi","Hãy điền đầy đủ thông tin sản phẩm!");
-    }
-    else {
+    ) {
+      setAlert(Alert.AlertType.ERROR, "Lỗi", "Hãy điền đầy đủ thông tin sản phẩm!");
+    } else {
       String maLoai = getMaLSP(loaiSP);
       System.out.println(maLoai);
       int isSell;
@@ -342,15 +340,15 @@ public class SanPhamController implements Initializable {
     }
   }
 
-  public void deleteSP(){
+  public void deleteSP() {
     if (Current_data.id == null || Current_data.id.isEmpty()) {
       setAlert(Alert.AlertType.ERROR, "Lỗi", "Hãy chọn sản phẩm cần xóa!");
       return;
     } else {
       Optional<ButtonType> optional = setAlert(Alert.AlertType.CONFIRMATION, "Xác nhận", "Bạn muốn xóa sản phẩm này?");
-      if(optional.get().equals(ButtonType.OK)){
+      if (optional.get().equals(ButtonType.OK)) {
         try {
-          String sqlDelete = "DELETE FROM `sanpham` WHERE `maSP`='"+Current_data.id+"'";
+          String sqlDelete = "DELETE FROM `sanpham` WHERE `maSP`='" + Current_data.id + "'";
           conn = DBUtils.openConnection();
           prepare = conn.prepareStatement(sqlDelete);
           prepare.executeUpdate();
@@ -363,7 +361,96 @@ public class SanPhamController implements Initializable {
         }
       } else setAlert(Alert.AlertType.CONFIRMATION, "Thông tin", "Hủy xóa sản phẩm");
     }
-
   }
+
+  public void updateSP() {
+    if (tenSP.getText().isEmpty() ||
+        donGia.getText().isEmpty() ||
+        Current_data.id == null) {
+      setAlert(Alert.AlertType.ERROR, "Lỗi", "Hãy điền đầy đủ thông tin sản phẩm!");
+      return; // Thoát nếu thông tin không đầy đủ
+    }
+
+    // Lấy thông tin nhập từ người dùng
+    String tenSPMoi = tenSP.getText().trim();
+    String donGiaMoi = donGia.getText().trim();
+    String maLoaiMoi = getMaLSP(loaiSP).trim();
+    int isSellMoi = trangThai.getSelectionModel().getSelectedItem().equals("Đang bán") ? 1 : 0;
+
+    // Cập nhật đường dẫn ảnh mới nếu có
+    String pathMoi = Current_data.path != null ? Current_data.path.replace("\\", "\\\\").trim() : null;
+
+    conn = DBUtils.openConnection();
+    try {
+      // Lấy thông tin hiện tại của sản phẩm từ cơ sở dữ liệu
+      String sqlSelect = "SELECT tenSP, loaiSP, donGia, anhSP, trangThai FROM sanpham WHERE maSP = ?";
+      prepare = conn.prepareStatement(sqlSelect);
+      prepare.setString(1, Current_data.id);
+      result = prepare.executeQuery();
+
+      if (result.next()) {
+        // Lấy dữ liệu cũ từ cơ sở dữ liệu
+        String tenSPOld = result.getString("tenSP").trim();
+        String loaiSPOld = result.getString("loaiSP").trim();
+        String donGiaOld = result.getString("donGia").trim();
+        String anhSPOld = result.getString("anhSP") != null ? result.getString("anhSP").trim() : null;
+        int trangThaiOld = result.getInt("trangThai");
+
+        System.out.println("Thông tin cũ: " + tenSPOld + ", " + loaiSPOld + ", " + donGiaOld + ", " + anhSPOld + ", " + trangThaiOld);
+        System.out.println("Thông tin mới: " + tenSPMoi + ", " + maLoaiMoi + ", " + donGiaMoi + ", " + pathMoi + ", " + isSellMoi);
+
+        // Kiểm tra nếu thông tin mới giống với thông tin cũ
+        boolean isSame = tenSPMoi.equals(tenSPOld) &&
+            maLoaiMoi.equals(loaiSPOld) &&
+            donGiaMoi.equals(donGiaOld) &&
+            ((pathMoi == null && anhSPOld == null) || (pathMoi != null && pathMoi.equals(anhSPOld))) &&
+            isSellMoi == trangThaiOld;
+
+        if (isSame) {
+          setAlert(Alert.AlertType.INFORMATION, "Thông tin", "Không có thay đổi nào để cập nhật!");
+          return;
+        }
+      }
+
+      // Nếu có thay đổi, thực hiện cập nhật
+      String sqlUpdate;
+      if (pathMoi != null) {
+        sqlUpdate = "UPDATE sanpham SET tenSP = ?, loaiSP = ?, donGia = ?, anhSP = ?, trangThai = ? WHERE maSP = ?";
+      } else {
+        sqlUpdate = "UPDATE sanpham SET tenSP = ?, loaiSP = ?, donGia = ?, trangThai = ? WHERE maSP = ?";
+      }
+
+      prepare = conn.prepareStatement(sqlUpdate);
+      prepare.setString(1, tenSPMoi);
+      prepare.setString(2, maLoaiMoi);
+      prepare.setString(3, donGiaMoi);
+
+      if (pathMoi != null) {
+        prepare.setString(4, pathMoi);
+        prepare.setInt(5, isSellMoi);
+        prepare.setString(6, Current_data.id);
+      } else {
+        prepare.setInt(4, isSellMoi);
+        prepare.setString(5, Current_data.id);
+      }
+
+      int rowsAffected = prepare.executeUpdate();
+      if (rowsAffected > 0) {
+        setAlert(Alert.AlertType.INFORMATION, "Thông tin", "Cập nhật thông tin thành công!");
+        showSPList("SELECT * FROM sanpham");
+        reloadSP();
+      } else {
+        setAlert(Alert.AlertType.ERROR, "Lỗi", "Không thể cập nhật thông tin sản phẩm!");
+      }
+
+    } catch (SQLException e) {
+      setAlert(Alert.AlertType.ERROR, "Lỗi", "Có lỗi xảy ra: " + e.getMessage());
+    } finally {
+      DBUtils.closeConnection(conn);
+    }
+  }
+
+
+
 
 }

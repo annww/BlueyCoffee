@@ -31,7 +31,7 @@
                 <Button fx:id="btnImporImg" layoutX="631.0" layoutY="175.0" mnemonicParsing="false" onAction="#importImage" prefHeight="40.0" prefWidth="154.0" styleClass="secondary_button" stylesheets="@../css/admin.css" text="Chọn ảnh từ thư viện" AnchorPane.bottomAnchor="30.0" />
                 <Button fx:id="btnAdd" layoutX="31.0" layoutY="242.0" mnemonicParsing="false" onAction="#addSP" prefHeight="40.0" prefWidth="100.0" styleClass="secondary_button" stylesheets="@../css/admin.css" text="Thêm" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="31.0" />
                 <Button fx:id="btnDelete" layoutX="165.0" layoutY="242.0" mnemonicParsing="false" onAction="#deleteSP" prefHeight="40.0" prefWidth="100.0" styleClass="secondary_button" text="Xóa" AnchorPane.bottomAnchor="30.0" />
-                <Button fx:id="btnUpdate" layoutX="299.0" layoutY="242.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="secondary_button" text="Cập nhật" AnchorPane.bottomAnchor="30.0" />
+                <Button fx:id="btnUpdate" layoutX="299.0" layoutY="242.0" mnemonicParsing="false" onAction="#updateSP" prefHeight="40.0" prefWidth="100.0" styleClass="secondary_button" text="Cập nhật" AnchorPane.bottomAnchor="30.0" />
                 <Button fx:id="btnCancel" layoutX="434.0" layoutY="242.0" mnemonicParsing="false" onAction="#reloadSP" prefHeight="40.0" prefWidth="100.0" styleClass="secondary_button" text="Hủy" AnchorPane.bottomAnchor="30.0" />
                 <Text fx:id="tinhTrangText" layoutX="304.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trạng thái:" />
                 <ComboBox fx:id="trangThai" layoutX="374.0" layoutY="63.0" prefWidth="150.0" promptText="Tình trạng hàng hóa" />
