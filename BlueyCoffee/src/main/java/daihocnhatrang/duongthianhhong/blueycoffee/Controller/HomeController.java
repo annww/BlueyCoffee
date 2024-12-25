@@ -1,17 +1,21 @@
 package daihocnhatrang.duongthianhhong.blueycoffee.Controller;
 
+import daihocnhatrang.duongthianhhong.blueycoffee.Utils.DBUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.Current_data;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.*;
 import java.util.*;
 
 public class HomeController implements Initializable {
@@ -43,12 +47,21 @@ public class HomeController implements Initializable {
   AnchorPane sanPhamform;
   private String username, chucVu;
 
+  @FXML
+  private ImageView imgUser;
+
   List<Button> btns;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     displayName();
     btns = new ArrayList<>(Arrays.asList(btnBanHang, btnHoaDon, btnThongKe, btnNhanVien, btnSanPham));
+    String user = Current_data.username; // Lấy mã nhân viên từ dữ liệu hiện tại
+    if (user != null) {
+      loadUserImage(user); // Hiển thị ảnh nhân viên
+    } else {
+      System.err.println("Mã nhân viên không tồn tại. Không thể tải ảnh.");
+    }
   }
 
   @FXML
@@ -183,4 +196,42 @@ public class HomeController implements Initializable {
         e.printStackTrace();
       }
     }
+
+  public void loadUserImage(String maNV) {
+    String anhNVPath = getAnhNV(maNV); // Lấy đường dẫn ảnh từ cơ sở dữ liệu
+    System.out.println("Đường dẫn ảnh nhân viên: " + anhNVPath); // Ghi nhật ký
+    try {
+      if (anhNVPath != null && !anhNVPath.trim().isEmpty()) {
+        Image userImage = new Image("file:" + anhNVPath, true);
+        imgUser.setImage(userImage);
+      } else {
+        throw new Exception("Đường dẫn ảnh trống hoặc không hợp lệ.");
+      }
+    } catch (Exception e) {
+      // Trường hợp không tải được ảnh, sử dụng ảnh mặc định
+      System.err.println("Lỗi khi tải ảnh: " + e.getMessage());
+      imgUser.setImage(new Image("file:../img/default.jpg", true));
+    }
   }
+
+
+  private String getAnhNV(String maNV) {
+    Connection conn = DBUtils.openConnection();
+    String sqlSelect = "SELECT anhNV FROM nhanvien WHERE tenNV = ?";
+    try (PreparedStatement preparedStatement = conn.prepareStatement(sqlSelect)) {
+      preparedStatement.setString(1, maNV); // Truyền giá trị maNV
+      try (ResultSet resultSet = preparedStatement.executeQuery()) {
+        if (resultSet.next()) {
+          return resultSet.getString("anhNV"); // Lấy đường dẫn ảnh
+        } else {
+          System.err.println("Không tìm thấy nhân viên với maNV: " + maNV);
+          return "../img/default.jpg"; // Ảnh mặc định
+        }
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException("Lỗi khi truy vấn ảnh nhân viên", e);
+    } finally {
+      DBUtils.closeConnection(conn);
+    }
+  }
+}

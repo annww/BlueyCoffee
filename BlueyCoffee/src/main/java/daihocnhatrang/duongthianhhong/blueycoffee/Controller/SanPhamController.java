@@ -2,6 +2,7 @@ package daihocnhatrang.duongthianhhong.blueycoffee.Controller;
 
 import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.Current_data;
 import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.SanPham;
+import daihocnhatrang.duongthianhhong.blueycoffee.Utils.DBUtils;
 import daihocnhatrang.duongthianhhong.blueycoffee.Utils.PriceUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +16,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.*;
 
-import daihocnhatrang.duongthianhhong.blueycoffee.Utils.DSUtils;
+import daihocnhatrang.duongthianhhong.blueycoffee.Utils.DBUtils;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -99,6 +100,35 @@ public class SanPhamController implements Initializable {
     getSPFromDB();
     getTrangThai();
     showSPList("SELECT * FROM sanpham");
+
+    tableSP.setOnMouseClicked(event -> displaySelectedSP());
+  }
+
+  private void displaySelectedSP() {
+    SanPham selectedSP = tableSP.getSelectionModel().getSelectedItem();
+    if (selectedSP != null) {
+      maSP.setText(selectedSP.getMaSP());
+      tenSP.setText(selectedSP.getTenSP());
+      donGia.setText(String.valueOf(selectedSP.getDonGia()));
+      loaiSP.setValue(selectedSP.getLoaiSP());
+      trangThai.setValue(selectedSP.getTrangThai());
+
+      // Hiển thị ảnh sản phẩm
+      String imagePath = selectedSP.getAnhSP();
+      if (imagePath != null && !imagePath.isEmpty()) {
+        File file = new File(imagePath);
+        if (file.exists()) {
+          img.setImage(new Image(file.toURI().toString(), 113, 125, false, true));
+        } else {
+          img.setImage(null); // Đặt về null nếu không tìm thấy ảnh
+        }
+      } else {
+        img.setImage(null);
+      }
+
+      // Lưu mã sản phẩm vào Current_data.id (để dùng trong chức năng xóa hoặc cập nhật)
+      Current_data.id = selectedSP.getMaSP();
+    }
   }
 
   public void showSPList(String sql){
@@ -124,7 +154,7 @@ public class SanPhamController implements Initializable {
 
   public ObservableList<SanPham> getSPList(String sql){
     ObservableList<SanPham> spList = FXCollections.observableArrayList();
-    conn = DSUtils.openConnection();
+    conn = DBUtils.openConnection();
     String sqlSelect = sql;
     try {
       prepare = conn.prepareStatement(sqlSelect);
@@ -147,12 +177,12 @@ public class SanPhamController implements Initializable {
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
-    DSUtils.closeConnection(conn);
+    DBUtils.closeConnection(conn);
     return spList;
   }
 
   private void getSPFromDB()  {
-    conn = DSUtils.openConnection();
+    conn = DBUtils.openConnection();
     String sqlSelect = "SELECT * FROM loaisp";
     Statement lenh = null;
     try {
@@ -170,7 +200,7 @@ public class SanPhamController implements Initializable {
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
-    DSUtils.closeConnection(conn);
+    DBUtils.closeConnection(conn);
   }
 
   private void getTrangThai(){
@@ -192,6 +222,63 @@ public class SanPhamController implements Initializable {
     trangThai.setValue(null);
     Current_data.id = "";
     showSPList("SELECT * FROM sanpham");
+  }
+
+
+
+  public void importImage(){
+    FileChooser openFile = new FileChooser();
+    openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File", "*png", "*jpg"));
+    File file = openFile.showOpenDialog(sanPham.getScene().getWindow());
+    if(file != null){
+      Current_data.path = file.getAbsolutePath();
+      Image imgage = new Image(file.toURI().toString(), 113, 125, false, true);
+      img.setImage(imgage);
+    }
+  }
+
+
+  private String setMaSP(ComboBox<String> loaiSP){
+    String getMaLSP = getMaLSP(this.loaiSP);
+    conn = DBUtils.openConnection();
+    String sqlSelect = "SELECT maSP FROM sanpham WHERE loaiSP LIKE ? ORDER BY maSP DESC LIMIT 1";
+    try (PreparedStatement preparedStatement = conn.prepareStatement(sqlSelect)) {
+      preparedStatement.setString(1, getMaLSP + "%");
+      try (ResultSet resultSet = preparedStatement.executeQuery()) {
+        if (!resultSet.next()) {
+          return getMaLSP + "0001";
+        }
+        String lastMaNV = resultSet.getString("maSP");
+        System.out.println("Mã lớn nhất: " + lastMaNV);
+        int number = Integer.parseInt(lastMaNV.substring(getMaLSP.length()));
+        return getMaLSP + String.format("%04d", number + 1);
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    } finally {
+      DBUtils.closeConnection(conn);
+    }
+  }
+
+  private String getMaLSP(ComboBox<String> cbb){
+    String maLSP = null;
+    for(String key : loaisps.keySet()){
+      if(loaisps.get(key) == cbb.getSelectionModel().getSelectedItem()){
+        maLSP = key;
+        return maLSP;
+      }
+    }
+    System.out.println(maLSP);
+    return maLSP;
+  }
+
+  // hien thi thong bao
+  private Optional<ButtonType> setAlert(Alert.AlertType alertType, String title, String message){
+    alert = new Alert(alertType);
+    alert.setTitle(title);
+    alert.setHeaderText("");
+    alert.setContentText(message);
+    return alert.showAndWait();
   }
 
   public void addSP(){
@@ -224,7 +311,7 @@ public class SanPhamController implements Initializable {
       String sqlInsert = "INSERT INTO sanpham (maSP, tenSP, loaiSP, donGia, anhSP, trangThai) " +
           "VALUES (?, ?, ?, ?, ?, ?)";
 
-      conn = DSUtils.openConnection();
+      conn = DBUtils.openConnection();
       try {
         Optional<ButtonType> optional = setAlert(Alert.AlertType.CONFIRMATION, "Xác nhận",
             "Bạn có chắc muốn thêm mới sản phẩm " + tenSP.getText() + "?");
@@ -250,63 +337,32 @@ public class SanPhamController implements Initializable {
         e.printStackTrace();
         setAlert(Alert.AlertType.ERROR, "Lỗi", "Có lỗi khi thêm sản phẩm: " + e.getMessage());
       } finally {
-        DSUtils.closeConnection(conn);
+        DBUtils.closeConnection(conn);
       }
     }
   }
 
-  public void importImage(){
-    FileChooser openFile = new FileChooser();
-    openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File", "*png", "*jpg"));
-    File file = openFile.showOpenDialog(sanPham.getScene().getWindow());
-    if(file != null){
-      Current_data.path = file.getAbsolutePath();
-      Image imgage = new Image(file.toURI().toString(), 113, 125, false, true);
-      img.setImage(imgage);
-    }
-  }
-
-  private String setMaSP(ComboBox<String> loaiSP){
-    String getMaLSP = getMaLSP(this.loaiSP);
-    conn = DSUtils.openConnection();
-    String sqlSelect = "SELECT maSP FROM sanpham WHERE loaiSP LIKE ? ORDER BY maSP DESC LIMIT 1";
-    try (PreparedStatement preparedStatement = conn.prepareStatement(sqlSelect)) {
-      preparedStatement.setString(1, getMaLSP + "%");
-      try (ResultSet resultSet = preparedStatement.executeQuery()) {
-        if (!resultSet.next()) {
-          return getMaLSP + "0001";
+  public void deleteSP(){
+    if(Current_data.id == null){
+      setAlert(Alert.AlertType.ERROR, "Lỗi", "Hãy chọn sản phẩm cần xóa!");
+    } else {
+      Optional<ButtonType> optional = setAlert(Alert.AlertType.CONFIRMATION, "Xác nhận", "Bạn muốn xóa sản phẩm này?");
+      if(optional.get().equals(ButtonType.OK)){
+        try {
+          String sqlDelete = "DELETE FROM `sanpham` WHERE `maSP`='"+Current_data.id+"'";
+          conn = DBUtils.openConnection();
+          prepare = conn.prepareStatement(sqlDelete);
+          prepare.executeUpdate();
+          setAlert(Alert.AlertType.INFORMATION, "Thông tin", "Đã xóa sản phẩm này!");
+          DBUtils.closeConnection(conn);
+          showSPList("SELECT * FROM sanpham");
+          reloadSP();
+        } catch (SQLException e) {
+          throw new RuntimeException(e);
         }
-        String lastMaNV = resultSet.getString("maSP");
-        System.out.println("Mã lớn nhất: " + lastMaNV);
-        int number = Integer.parseInt(lastMaNV.substring(getMaLSP.length()));
-        return getMaLSP + String.format("%04d", number + 1);
-      }
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    } finally {
-      DSUtils.closeConnection(conn);
+      } else setAlert(Alert.AlertType.CONFIRMATION, "Thông tin", "Hủy xóa sản phẩm");
     }
-  }
 
-  private String getMaLSP(ComboBox<String> cbb){
-    String maLSP = null;
-    for(String key : loaisps.keySet()){
-      if(loaisps.get(key) == cbb.getSelectionModel().getSelectedItem()){
-        maLSP = key;
-        return maLSP;
-      }
-    }
-    System.out.println(maLSP);
-    return maLSP;
-  }
-
-  // hien thi thong bao
-  private Optional<ButtonType> setAlert(Alert.AlertType alertType, String title, String message){
-    alert = new Alert(alertType);
-    alert.setTitle(title);
-    alert.setHeaderText("");
-    alert.setContentText(message);
-    return alert.showAndWait();
   }
 
 }

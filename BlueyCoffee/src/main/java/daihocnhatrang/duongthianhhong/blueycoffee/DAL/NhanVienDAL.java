@@ -2,7 +2,7 @@ package daihocnhatrang.duongthianhhong.blueycoffee.DAL;
 
 
 import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.NhanVien;
-import daihocnhatrang.duongthianhhong.blueycoffee.Utils.DSUtils;
+import daihocnhatrang.duongthianhhong.blueycoffee.Utils.DBUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ public class NhanVienDAL {
   public void addNhanVien(NhanVien nhanVien) throws SQLException, ClassNotFoundException {
     String sql = "INSERT INTO nhanvien (fullname, email, phone, username, password) VALUES (?, ?, ?, ?, ?, ?)";
 
-    try (Connection conn = DSUtils.openConnection();
+    try (Connection conn = DBUtils.openConnection();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
 
       stmt.setString(1, nhanVien.getFullname());
@@ -36,7 +36,7 @@ public class NhanVienDAL {
 
   public boolean Login(String username, String hashedPassword) throws Exception {
     String sql = "SELECT COUNT(*) FROM nhanvien WHERE username = ? AND password = ?";
-    try (Connection conn = DSUtils.openConnection();
+    try (Connection conn = DBUtils.openConnection();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
 
       stmt.setString(1, username);

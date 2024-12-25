@@ -14,7 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.Current_data;
 import daihocnhatrang.duongthianhhong.blueycoffee.Utils.ComonUtils;
-import daihocnhatrang.duongthianhhong.blueycoffee.Utils.DSUtils;
+import daihocnhatrang.duongthianhhong.blueycoffee.Utils.DBUtils;
 
 import java.io.IOException;
 import java.sql.*;
@@ -42,7 +42,7 @@ import java.sql.*;
         showAlert(Alert.AlertType.ERROR, "Lỗi đăng nhập", "Tên tài khoản và mật khẩu không để trống!");
         return;
       }
-      Connection conn = DSUtils.openConnection();
+      Connection conn = DBUtils.openConnection();
       String sqlSelect = "SELECT * FROM nhanvien";
       Statement lenh = conn.createStatement();
       ResultSet ketQua = lenh.executeQuery(sqlSelect);
@@ -78,7 +78,7 @@ import java.sql.*;
         System.out.println("Đăng nhập không thành công");
       }
 
-      DSUtils.closeConnection(conn);
+      DBUtils.closeConnection(conn);
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message){
