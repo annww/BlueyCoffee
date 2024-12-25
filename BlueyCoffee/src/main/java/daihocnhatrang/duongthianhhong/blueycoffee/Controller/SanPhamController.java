@@ -343,8 +343,9 @@ public class SanPhamController implements Initializable {
   }
 
   public void deleteSP(){
-    if(Current_data.id == null){
+    if (Current_data.id == null || Current_data.id.isEmpty()) {
       setAlert(Alert.AlertType.ERROR, "Lỗi", "Hãy chọn sản phẩm cần xóa!");
+      return;
     } else {
       Optional<ButtonType> optional = setAlert(Alert.AlertType.CONFIRMATION, "Xác nhận", "Bạn muốn xóa sản phẩm này?");
       if(optional.get().equals(ButtonType.OK)){
