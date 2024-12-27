@@ -10,12 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="product_Form" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="230.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.Controller.cardProductController">
+<AnchorPane fx:id="product_Form" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="220.0" style="-fx-background-color: #fff;" styleClass="shadow" stylesheets="@../css/admin.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.Controller.cardProductController">
    <children>
-      <VBox layoutX="1.0" layoutY="-1.0" prefHeight="180.0" prefWidth="230.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="1.0" layoutY="-1.0" prefHeight="180.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="43.0" prefWidth="230.0">
+            <HBox alignment="CENTER" prefHeight="43.0" prefWidth="200.0">
                <children>
                   <Label fx:id="product_Name" contentDisplay="CENTER" prefHeight="26.0" prefWidth="159.0" text="Matcha Latte">
                      <font>
