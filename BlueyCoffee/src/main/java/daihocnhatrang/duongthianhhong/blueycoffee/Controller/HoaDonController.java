@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -86,7 +85,7 @@ public class HoaDonController implements Initializable {
 
   public ObservableList<SanPham> getCardListFromDB(){
     String sqlSelect = "SELECT * FROM sanpham WHERE `trangThai` = 1";
-    ObservableList<SanPham> listData = FXCollections.observableArrayList();
+    ObservableList<SanPham> cardList = FXCollections.observableArrayList();
     conn = DBUtils.openConnection();
     try{
       prepare = conn.prepareStatement(sqlSelect);
@@ -98,14 +97,14 @@ public class HoaDonController implements Initializable {
             result.getNString("tenSP"),
             result.getString("anhSP"),
             result.getInt("donGia"),
-            loaiSPs.get(result.getString("loaiSP"))
-        );
-        listData.add(sp);
+            loaiSPs.get(result.getString("loaiSP")));
+        cardList.add(sp);
       }
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
-    return listData;
+    DBUtils.closeConnection(conn);
+    return cardList;
   }
 
   public void displayCardList(ObservableList<SanPham> observableList){
@@ -121,10 +120,10 @@ public class HoaDonController implements Initializable {
         loader.setLocation(getClass().getResource("/daihocnhatrang/duongthianhhong/blueycoffee/fxml/cardProduct.fxml"));
         AnchorPane pane = loader.load();
         cardProductController cardProduct = loader.getController();
-        cardProduct.setData(cardList.get(i),this);
-        if(column == 4){
+        cardProduct.setData(cardList.get(i),this) ;
+        if(column == 3){
           column = 0;
-          row++;
+          row+= 1;
         }
         menu_gridPane.add(pane, column++, row);
         GridPane.setMargin(pane, new Insets(10));

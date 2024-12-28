@@ -70,6 +70,11 @@
     -fx-background-radius: 8px;
 }
 
+.img_radius{
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+}
+
 .shadow{
     -fx-background-color: #fff;
     -fx-background-radius: 10;

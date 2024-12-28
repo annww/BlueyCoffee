@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -33,11 +34,12 @@ public class cardProductController implements Initializable {
   private Label product_Price;
 
   @FXML
-  private Spinner<?> product_Spineer;
+  private Spinner<Integer> product_Spineer;
 
   @FXML
   private Button product_btnThem;
 
+  private SpinnerValueFactory<Integer> spin;
   private SanPham sanPham;
   private HoaDonController hoaDon;
   private Image image;
@@ -45,21 +47,50 @@ public class cardProductController implements Initializable {
   private PreparedStatement prepare;
   private Statement statement;
   private ResultSet result;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
+    setQuantity();
   }
 
-  public void setData(SanPham sanPham, HoaDonController hoaDon){
+  public void setData(SanPham sanPham, HoaDonController hoaDon) {
     this.hoaDon = hoaDon;
     this.sanPham = sanPham;
+
     product_Name.setText(sanPham.getTenSP());
     product_Price.setText(String.valueOf(sanPham.getDonGia()));
-    String path = "File: " + sanPham.getAnhSP();
-    image = new Image(path, 124, 124,false, false);
-    product_ImageView.setImage(image);
+
+    String path = "file:/" + sanPham.getAnhSP().replace("\\", "/");
+    System.out.println("Đường dẫn ảnh: " + path);
+
+    try {
+      image = new Image(path, 124, 124, false, false);
+      if (image.isError()) {
+        throw new Exception("Lỗi khi tải ảnh.");
+      }
+      product_ImageView.setImage(image);
+      System.out.println("Ảnh đã được hiển thị.");
+    } catch (Exception e) {
+      System.out.println("Không thể tải ảnh từ đường dẫn: " + path);
+      e.printStackTrace();
+    }
   }
 
+
+
+  public void checkImageLoaded() {
+    if (product_ImageView.getImage() != null) {
+      System.out.println("Ảnh đã được tải thành công: " + sanPham.getAnhSP());
+    } else {
+      System.out.println("Không thể tải ảnh từ đường dẫn: " + sanPham.getAnhSP());
+    }
+  }
+
+  private int qty;
+  public void setQuantity(){
+    spin = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,100,0);
+    product_Spineer.setValueFactory(spin);
+  }
 //  public void addCTHD(MouseEvent mouseEvent){
 //    HoaDonController.cthds.add(new CTHD(sanPham.getMaSP(),sanPham.getTenSP()," ", sanPham.getDonGia(), 1));
 //    hoaDon.clearTable();
