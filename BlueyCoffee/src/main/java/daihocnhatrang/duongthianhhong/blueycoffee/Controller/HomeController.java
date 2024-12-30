@@ -136,18 +136,18 @@ public class HomeController implements Initializable {
       } catch (IOException e) {
         e.printStackTrace();
       }
-    }
+  }
 
   @FXML
   private void setBtnNhanVien () {
     try {
       resetColorButton();
-      btnBanHang.getStyleClass().add("nav-button-choose");
+      btnNhanVien.getStyleClass().add("nav-button-choose");
       setViewInvisible();
-      banHangform.setVisible(true);
-      FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/daihocnhatrang/duongthianhhong/blueycoffee/fxml/nhanvien.fxml"));
-      Parent productRoot = productLoader.load();
-      addChildScene(banHangform, productRoot);
+      nhanVienform.setVisible(true);
+      FXMLLoader employeeLoader = new FXMLLoader(getClass().getResource("/daihocnhatrang/duongthianhhong/blueycoffee/fxml/nhanvien.fxml"));
+      Parent productRoot = employeeLoader.load();
+      addChildScene(nhanVienform, productRoot);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -157,12 +157,12 @@ public class HomeController implements Initializable {
   private void setBtnHoaDon () {
     try {
       resetColorButton();
-      btnBanHang.getStyleClass().add("nav-button-choose");
+      btnHoaDon.getStyleClass().add("nav-button-choose");
       setViewInvisible();
-      banHangform.setVisible(true);
+      hoaDonform.setVisible(true);
       FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/daihocnhatrang/duongthianhhong/blueycoffee/fxml/hoadon.fxml"));
       Parent productRoot = productLoader.load();
-      addChildScene(banHangform, productRoot);
+      addChildScene(hoaDonform, productRoot);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -172,12 +172,12 @@ public class HomeController implements Initializable {
   private void setBtnThongKe () {
     try {
       resetColorButton();
-      btnBanHang.getStyleClass().add("nav-button-choose");
+      btnThongKe.getStyleClass().add("nav-button-choose");
       setViewInvisible();
-      banHangform.setVisible(true);
+      thongKeForm.setVisible(true);
       FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/daihocnhatrang/duongthianhhong/blueycoffee/fxml/thongke.fxml"));
       Parent productRoot = productLoader.load();
-      addChildScene(banHangform, productRoot);
+      addChildScene(thongKeForm, productRoot);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -186,12 +186,12 @@ public class HomeController implements Initializable {
     private void setBtnSanPham () {
       try {
         resetColorButton();
-        btnBanHang.getStyleClass().add("nav-button-choose");
+        btnSanPham.getStyleClass().add("nav-button-choose");
         setViewInvisible();
-        banHangform.setVisible(true);
+        sanPhamform.setVisible(true);
         FXMLLoader productLoader = new FXMLLoader(getClass().getResource("/daihocnhatrang/duongthianhhong/blueycoffee/fxml/sanpham.fxml"));
         Parent productRoot = productLoader.load();
-        addChildScene(banHangform, productRoot);
+        addChildScene(sanPhamform, productRoot);
       } catch (IOException e) {
         e.printStackTrace();
       }
