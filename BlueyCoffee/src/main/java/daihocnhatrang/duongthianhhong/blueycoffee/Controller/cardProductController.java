@@ -1,6 +1,8 @@
 package daihocnhatrang.duongthianhhong.blueycoffee.Controller;
 
+import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.CTHD;
 import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.SanPham;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -50,7 +52,7 @@ public class cardProductController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    setQuantity();
+//    setQuantity();
   }
 
   public void setData(SanPham sanPham, HoaDonController hoaDon) {
@@ -61,39 +63,22 @@ public class cardProductController implements Initializable {
     product_Price.setText(String.valueOf(sanPham.getDonGia()));
 
     String path = "file:/" + sanPham.getAnhSP().replace("\\", "/");
-    System.out.println("Đường dẫn ảnh: " + path);
 
     try {
       image = new Image(path, 124, 124, false, false);
       if (image.isError()) {
-        throw new Exception("Lỗi khi tải ảnh.");
+        throw new Exception();
       }
       product_ImageView.setImage(image);
-      System.out.println("Ảnh đã được hiển thị.");
     } catch (Exception e) {
-      System.out.println("Không thể tải ảnh từ đường dẫn: " + path);
       e.printStackTrace();
     }
   }
 
-
-
-  public void checkImageLoaded() {
-    if (product_ImageView.getImage() != null) {
-      System.out.println("Ảnh đã được tải thành công: " + sanPham.getAnhSP());
-    } else {
-      System.out.println("Không thể tải ảnh từ đường dẫn: " + sanPham.getAnhSP());
-    }
+  public void addBtn(javafx.scene.input.MouseEvent mouseEvent) {
+    HoaDonController.cthds.add(new CTHD(sanPham.getMaSP(),sanPham.getTenSP(),"",sanPham.getDonGia(),1));
+    hoaDon.clearTable();
+    hoaDon.showCTHDlist();
   }
 
-  private int qty;
-  public void setQuantity(){
-    spin = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,100,0);
-    product_Spineer.setValueFactory(spin);
-  }
-//  public void addCTHD(MouseEvent mouseEvent){
-//    HoaDonController.cthds.add(new CTHD(sanPham.getMaSP(),sanPham.getTenSP()," ", sanPham.getDonGia(), 1));
-//    hoaDon.clearTable();
-//    hoaDon.showCTHDList();
-//  }
 }
