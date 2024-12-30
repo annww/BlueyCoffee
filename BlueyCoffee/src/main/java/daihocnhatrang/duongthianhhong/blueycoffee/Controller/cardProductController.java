@@ -2,7 +2,6 @@ package daihocnhatrang.duongthianhhong.blueycoffee.Controller;
 
 import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.CTHD;
 import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.SanPham;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,7 +11,6 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import org.w3c.dom.events.MouseEvent;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -43,7 +41,7 @@ public class cardProductController implements Initializable {
 
   private SpinnerValueFactory<Integer> spin;
   private SanPham sanPham;
-  private HoaDonController hoaDon;
+  private BanHangController hoaDon;
   private Image image;
   private Connection conn;
   private PreparedStatement prepare;
@@ -55,7 +53,7 @@ public class cardProductController implements Initializable {
 //    setQuantity();
   }
 
-  public void setData(SanPham sanPham, HoaDonController hoaDon) {
+  public void setData(SanPham sanPham, BanHangController hoaDon) {
     this.hoaDon = hoaDon;
     this.sanPham = sanPham;
 
@@ -76,7 +74,7 @@ public class cardProductController implements Initializable {
   }
 
   public void addBtn(javafx.scene.input.MouseEvent mouseEvent) {
-    HoaDonController.cthds.add(new CTHD(sanPham.getMaSP(),sanPham.getTenSP(),"",sanPham.getDonGia(),1));
+    BanHangController.cthds.add(new CTHD(sanPham.getMaSP(),sanPham.getTenSP(),"",sanPham.getDonGia(),1));
     hoaDon.clearTable();
     hoaDon.showCTHDlist();
   }
