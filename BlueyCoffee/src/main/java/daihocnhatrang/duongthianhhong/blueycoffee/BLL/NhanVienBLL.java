@@ -22,7 +22,7 @@ public class NhanVienBLL {
     }
 
     // Kiểm tra tính hợp lệ của họ tên
-    if (nhanVien.getFullname() == null || nhanVien.getFullname().isEmpty()) {
+    if (nhanVien.getTenNV() == null || nhanVien.getTenNV().isEmpty()) {
       throw new Exception("Họ tên không được để trống.");
     }
 
@@ -34,9 +34,9 @@ public class NhanVienBLL {
     }
 
     // Kiểm tra tính hợp lệ của số điện thoại
-    if (nhanVien.getPhone() == null || nhanVien.getPhone().isEmpty()) {
+    if (nhanVien.getSDT() == null || nhanVien.getSDT().isEmpty()) {
       throw new Exception("Số điện thoại không được để trống.");
-    } else if (!nhanVien.getPhone().matches("^\\d{10,15}$")) {
+    } else if (!nhanVien.getSDT().matches("^\\d{10,15}$")) {
       throw new Exception("Số điện thoại không hợp lệ. Vui lòng nhập từ 10 đến 15 chữ số.");
     }
 
@@ -45,7 +45,7 @@ public class NhanVienBLL {
     nhanVien.setPassword(hashedPassword);
 
     // Gửi xuống DAL để lưu vào CSDL
-    nhanVienDAL.addNhanVien(nhanVien);
+    nhanVienDAL.addNV(nhanVien);
   }
 
 
