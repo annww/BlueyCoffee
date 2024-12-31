@@ -108,10 +108,32 @@ public class NhanVienController implements Initializable {
   private ResultSet result;
   private ObservableList<NhanVien> nhanViens;
   private Image image;
+  private HashMap<Integer, String> loaiCVs = new HashMap<>();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    getCVfromDB();
     hienThiNV();
+
+  }
+
+  public void getCVfromDB(){
+    conn = DBUtils.openConnection();
+    String sqlSelect = "SELECT * FROM chucVu";
+    statement = null;
+    try{
+      statement = conn.createStatement();
+      result = statement.executeQuery(sqlSelect);
+      while (result.next()){
+        Integer maCV = result.getInt("maCV");
+        String loaiCV = result.getString("loaiChucVu");
+        loaiCVs.put(maCV, loaiCV);
+      }
+      System.out.println(loaiCVs.values());
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    DBUtils.closeConnection(conn);
   }
 
   public ObservableList<NhanVien> getNhanViens(String sql) {
@@ -127,16 +149,18 @@ public class NhanVienController implements Initializable {
             result.getNString("tenNV"),
             result.getBoolean("gioiTinh"),
             result.getDate("ngaySinh"),
-            loainvs.get(result.getString("chucVu")),  // Assuming loainvs is a map of roles
+            loaiCVs.get(result.getInt("chucVu")),
             result.getNString("SDT"),
             result.getNString("email"),
             result.getString("anhNV"),
             result.getBoolean("isWorking") ? "Đang làm" : "Nghỉ làm",
             result.getString("username"),
             result.getString("password"),
-            result.getTimestamp("createdAt"),  // Chỉ lấy cột createdAt
-            null  // Đặt là null nếu không có `updatedAt`
+            result.getTimestamp("createdAt"),
+            null
         );
+        System.out.println(loaiCVs.get(1));
+        System.out.println(nv.getChucVu());
         nvList.add(nv);
       }
     } catch (SQLException e) {
@@ -154,22 +178,57 @@ public class NhanVienController implements Initializable {
     // Kiểm tra danh sách dữ liệu
     System.out.println("Danh sách nhân viên: " + nhanViens.size());
     for (NhanVien nv : nhanViens) {
-      System.out.println(nv.getTenNV()); // In ra tên nhân viên để kiểm tra
+      System.out.println(nv.getTenNV());
     }
 
     col_maNV.setCellValueFactory(new PropertyValueFactory<>("maNV"));
     col_tenNV.setCellValueFactory(new PropertyValueFactory<>("tenNV"));
     col_GioiTinh.setCellValueFactory(new PropertyValueFactory<>("gioiTinhText"));
-    col_ChucVu.setCellValueFactory(new PropertyValueFactory<>("chucVuText"));
+    col_ChucVu.setCellValueFactory(new PropertyValueFactory<>("chucVu"));
     col_TrangThai.setCellValueFactory(new PropertyValueFactory<>("isWorking"));
     col_NgayBatDauLam.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
 
     tableView_ttinNV.setItems(nhanViens);
   }
 
-  public String getChucVuText() {
-    return loainvs.containsKey(chucVu) ? loainvs.get(chucVu) : "Không xác định";
-  }
+//  private String getMaCV(){
+//    String maCV = null;
+//    for(String key: loaiCVs.keySet()){
+//      System.out.println(key);
+//    }
+//  }
+
+//  private String getLoaiChucVu(String maCV) {
+//    String loaiChucVu = "";
+//
+//    // Kiểm tra mã chức vụ không rỗng
+//    if (maCV == null || maCV.isEmpty()) {
+//      System.out.println("Mã chức vụ không hợp lệ.");
+//      return loaiChucVu;
+//    }
+//
+//    String query = "SELECT loaiCV FROM chucvu WHERE maCV = ?";
+//    try (Connection conn = DBUtils.openConnection();
+//         PreparedStatement prepare = conn.prepareStatement(query)) {
+//
+//      // Gán tham số vào câu lệnh SQL
+//      prepare.setString(1, maCV);
+//
+//      // Thực thi câu truy vấn
+//      ResultSet rs = prepare.executeQuery();
+//      if (rs.next()) {
+//        loaiChucVu = rs.getString("loaiCV");
+//      } else {
+//        System.out.println("Không tìm thấy chức vụ với mã: " + maCV);
+//      }
+//
+//    } catch (SQLException e) {
+//      System.err.println("Lỗi khi truy vấn loại chức vụ: " + e.getMessage());
+//    }
+//
+//    return loaiChucVu;
+//  }
+
 
 
 }

@@ -202,8 +202,11 @@ public class HomeController implements Initializable {
     System.out.println("Đường dẫn ảnh nhân viên: " + anhNVPath); // Ghi nhật ký
     try {
       if (anhNVPath != null && !anhNVPath.trim().isEmpty()) {
-        Image userImage = new Image("file:" + anhNVPath, true);
-        imgUser.setImage(userImage);
+        String path = "file:/" + anhNVPath.replace("\\", "/");
+        System.out.println(path);
+        Image userImage = new Image(path, true);
+        Image image = new Image(path, 36, 36, false, true);
+        imgUser.setImage(image);
       } else {
         throw new Exception("Đường dẫn ảnh trống hoặc không hợp lệ.");
       }

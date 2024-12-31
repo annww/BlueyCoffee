@@ -9,6 +9,7 @@ public class NhanVien {
   boolean gioiTinh;
   Date ngaySinh;
 
+
   public NhanVien(String maNV, String tenNV, String chucVu, String sdt, String email, String username, String password, String anhNV, String isWorking, Timestamp createdAt, Timestamp updatedAt, boolean gioiTinh, Date ngaySinh) {
   }
 
@@ -150,4 +151,5 @@ public class NhanVien {
   public void setNgaySinh(Date ngaySinh) {
     this.ngaySinh = ngaySinh;
   }
+
 }

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="product_Form" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#addBtn" prefHeight="216.0" prefWidth="175.0" style="-fx-background-color: #fff;" styleClass="shadow" stylesheets="@../css/admin.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.Controller.cardProductController">
+<AnchorPane fx:id="product_Form" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#addBtn" prefHeight="216.0" prefWidth="170.0" style="-fx-background-color: #fff;" styleClass="shadow" stylesheets="@../css/admin.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.Controller.cardProductController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="24.0" prefHeight="130.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
          <children>
