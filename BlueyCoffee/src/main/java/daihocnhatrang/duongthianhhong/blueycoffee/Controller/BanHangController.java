@@ -195,13 +195,14 @@ public class BanHangController implements Initializable {
     menu_col_Quantity.setOnEditCommit(event -> {
       CTHD cthd = event.getRowValue();
       cthd.setSoLuong(event.getNewValue());
-      if (cthd.getSoLuong() == 0) {
+      if (cthd.getSoLuong() == 0){
         cthds.remove(cthd);
         cthdList.remove(cthd);
         System.out.println("Đã xóa sản phẩm này");
       }
       setHDInfor();
       menu_tableView.refresh();
+
     });
 
     menu_col_Total.setCellFactory(tc -> new TableCell<CTHD, Integer>() {

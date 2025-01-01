@@ -31,7 +31,7 @@
             </children></AnchorPane>
         <AnchorPane layoutX="580.8" layoutY="25.0" prefHeight="370.0" prefWidth="461.0" style="-fx-background-color: #fff;" styleClass="button_radius" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
             <children>
-                <TableView fx:id="menu_tableView" prefHeight="285.0" prefWidth="474.0" AnchorPane.bottomAnchor="285.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+                <TableView fx:id="menu_tableView" editable="true" prefHeight="285.0" prefWidth="474.0" AnchorPane.bottomAnchor="285.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
                     <columns>
                         <TableColumn fx:id="menu_col_productName" prefWidth="99.20001339912415" text="Tên sản phẩm" />
                         <TableColumn fx:id="menu_col_Quantity" prefWidth="65.59998321533203" text="Số lượng" />

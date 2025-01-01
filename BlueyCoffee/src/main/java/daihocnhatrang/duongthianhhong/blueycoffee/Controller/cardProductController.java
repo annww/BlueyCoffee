@@ -41,7 +41,7 @@ public class cardProductController implements Initializable {
 
   private SpinnerValueFactory<Integer> spin;
   private SanPham sanPham;
-  private BanHangController hoaDon;
+  private BanHangController banHang;
   private Image image;
   private Connection conn;
   private PreparedStatement prepare;
@@ -53,8 +53,8 @@ public class cardProductController implements Initializable {
 //    setQuantity();
   }
 
-  public void setData(SanPham sanPham, BanHangController hoaDon) {
-    this.hoaDon = hoaDon;
+  public void setData(SanPham sanPham, BanHangController banHang) {
+    this.banHang = banHang;
     this.sanPham = sanPham;
 
     product_Name.setText(sanPham.getTenSP());
@@ -74,9 +74,20 @@ public class cardProductController implements Initializable {
   }
 
   public void addBtn(javafx.scene.input.MouseEvent mouseEvent) {
-    BanHangController.cthds.add(new CTHD(sanPham.getMaSP(),sanPham.getTenSP(),"",sanPham.getDonGia(),1));
-    hoaDon.clearTable();
-    hoaDon.showCTHDlist();
+    boolean exists = false;
+
+    // Kiểm tra danh sách xem mã sản phẩm đã tồn tại hay chưa
+    for (CTHD cthd : BanHangController.cthds) {
+      if (sanPham.getMaSP().equals(cthd.getMaSP())) {
+        exists = true; // Đánh dấu là đã tồn tại
+        break; // Thoát khỏi vòng lặp vì không cần kiểm tra thêm
+      }
+    }
+    if (!exists) {
+      BanHangController.cthds.add(new CTHD(sanPham.getMaSP(), sanPham.getTenSP(), "", sanPham.getDonGia(), 1));
+      banHang.clearTable();
+      banHang.showCTHDlist();
+    }
+  }
   }
 
-}

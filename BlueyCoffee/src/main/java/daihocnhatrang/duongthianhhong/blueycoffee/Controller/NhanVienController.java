@@ -1,29 +1,33 @@
 package daihocnhatrang.duongthianhhong.blueycoffee.Controller;
 
+import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.Current_data;
 import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.NhanVien;
 import daihocnhatrang.duongthianhhong.blueycoffee.Utils.DBUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.Current_data.chucVu;
+import static daihocnhatrang.duongthianhhong.blueycoffee.Utils.AlertUtils.setAlert;
 
 public class NhanVienController implements Initializable {
+
+  @FXML
+  private ImageView img;
 
   @FXML
   private Button btnAdd;
@@ -53,7 +57,7 @@ public class NhanVienController implements Initializable {
   private ComboBox<String> cbbTrangThaiFind;
 
   @FXML
-  private ComboBox<String> ccbChucVuFind;
+  private ComboBox<String> cbbChucVuFind;
 
   @FXML
   private TableColumn<NhanVien, String> col_ChucVu;
@@ -100,6 +104,9 @@ public class NhanVienController implements Initializable {
   @FXML
   private TextField txtTenNVFind;
 
+  @FXML
+  private AnchorPane nhanVien;
+
   private HashMap<String, String> loainvs = new HashMap<>();
   private String[] trangthainvs = new String[]{"Đang làm", "Nghỉ làm"};
   private Connection conn;
@@ -114,7 +121,11 @@ public class NhanVienController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     getCVfromDB();
     hienThiNV();
+    ToggleGroup genderGroup = new ToggleGroup();
+    radioNam.setToggleGroup(genderGroup);
+    radioNu.setToggleGroup(genderGroup);
 
+    radioNam.setSelected(true);
   }
 
   public void getCVfromDB(){
@@ -171,7 +182,6 @@ public class NhanVienController implements Initializable {
     return nvList;
   }
 
-
   public void hienThiNV() {
     ObservableList<NhanVien> nhanViens = getNhanViens("SELECT * FROM nhanvien");
 
@@ -191,44 +201,108 @@ public class NhanVienController implements Initializable {
     tableView_ttinNV.setItems(nhanViens);
   }
 
-//  private String getMaCV(){
-//    String maCV = null;
-//    for(String key: loaiCVs.keySet()){
-//      System.out.println(key);
-//    }
-//  }
-
-//  private String getLoaiChucVu(String maCV) {
-//    String loaiChucVu = "";
-//
-//    // Kiểm tra mã chức vụ không rỗng
-//    if (maCV == null || maCV.isEmpty()) {
-//      System.out.println("Mã chức vụ không hợp lệ.");
-//      return loaiChucVu;
-//    }
-//
-//    String query = "SELECT loaiCV FROM chucvu WHERE maCV = ?";
-//    try (Connection conn = DBUtils.openConnection();
-//         PreparedStatement prepare = conn.prepareStatement(query)) {
-//
-//      // Gán tham số vào câu lệnh SQL
-//      prepare.setString(1, maCV);
-//
-//      // Thực thi câu truy vấn
-//      ResultSet rs = prepare.executeQuery();
-//      if (rs.next()) {
-//        loaiChucVu = rs.getString("loaiCV");
-//      } else {
-//        System.out.println("Không tìm thấy chức vụ với mã: " + maCV);
-//      }
-//
-//    } catch (SQLException e) {
-//      System.err.println("Lỗi khi truy vấn loại chức vụ: " + e.getMessage());
-//    }
-//
-//    return loaiChucVu;
-//  }
+  public void importImage() {
+    FileChooser openFile = new FileChooser();
+    openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File", "*png", "*jpg"));
+    File file = openFile.showOpenDialog(nhanVien.getScene().getWindow());
+    if (file != null) {
+      Current_data.path = file.getAbsolutePath();
+      Image imgage = new Image(file.toURI().toString(), 125, 125, false, true);
+      img.setImage(imgage);
+    }
+  }
 
 
+  public void displaySelectedNV(){
+    NhanVien selectedItem = tableView_ttinNV.getSelectionModel().getSelectedItem();
+    int num = tableView_ttinNV.getSelectionModel().getSelectedIndex();
+    if((num - 1) < -1 ) return;
+    txtMaNV.setText(selectedItem.getMaNV());
+    txtTenNV.setText(selectedItem.getTenNV());
+    if(selectedItem.isGioiTinh()){
+      radioNam.setSelected(true);
+      radioNu.setSelected(false);
+    }
+    else {
+      radioNu.setSelected(true);
+      radioNam.setSelected(false);
+    }
+    String getDate = String.valueOf(selectedItem.getNgaySinh());
+    LocalDate parse = LocalDate.parse(getDate);
+    System.out.println(parse);
+    dateNgaySinh.setValue(parse);
+    txtEmail.setText(selectedItem.getEmail());
+    txtPhoneNum.setText(selectedItem.getSDT());
+    Current_data.path = selectedItem.getAnhNV();
+    Current_data.id = selectedItem.getMaNV();
+    String path = "File:"+ Current_data.path;
+    Image image = new Image(path, 113, 125, false, true);
+    img.setImage(image);
+    String cvNV= selectedItem.getChucVu();
+    cbbChucVu.getSelectionModel().select(cvNV);
+    cbbTrangThai.getSelectionModel().select(selectedItem.getIsWorking()=="Đang làm"?0:1);
+  }
 
+  public void reloadNV() {
+    txtMaNV.setText("");
+    txtTenNV.setText("");
+    radioNam.setSelected(false);
+    radioNu.setSelected(false);
+    dateNgaySinh.setValue(null);
+    txtEmail.setText("");
+    txtPhoneNum.setText("");
+    cbbChucVu.setValue(null);
+    cbbTrangThai.setValue(null);
+    img.setImage(null);
+    txtTenNVFind.setText("");
+    cbbChucVuFind.setValue(null);
+    cbbTrangThaiFind.setValue(null);
+
+    Current_data.id = "";
+
+    ObservableList<NhanVien> nhanViens = getNhanViens("SELECT * FROM nhanvien");
+    tableView_ttinNV.setItems(nhanViens);
+  }
+
+  public boolean setRadioGender() {
+    return radioNam.isSelected();
+  }
+  
+  public void deleteNV() {
+    if (Current_data.id == null || Current_data.id.isEmpty()) {
+      setAlert(Alert.AlertType.ERROR, "Lỗi", "Hãy chọn nhân viên cần xóa!");
+      return;
+    }
+
+    Optional<ButtonType> optional = setAlert(Alert.AlertType.CONFIRMATION, "Xác nhận", "Bạn muốn xóa nhân viên này?");
+    if (optional.isPresent() && optional.get().equals(ButtonType.OK)) {
+      String sqlDelete = "DELETE FROM nhanvien WHERE maNV = ?";
+      try {
+        conn = DBUtils.openConnection();
+        prepare = conn.prepareStatement(sqlDelete);
+        prepare.setString(1, Current_data.id);
+        int rowsAffected = prepare.executeUpdate();
+
+        if (rowsAffected > 0) {
+          setAlert(Alert.AlertType.INFORMATION, "Thông tin", "Đã xóa nhân viên này!");
+        } else {
+          setAlert(Alert.AlertType.WARNING, "Thông tin", "Không tìm thấy nhân viên để xóa!");
+        }
+
+      } catch (SQLException e) {
+        setAlert(Alert.AlertType.ERROR, "Lỗi", "Đã xảy ra lỗi khi xóa nhân viên: " + e.getMessage());
+        e.printStackTrace();
+      } finally {
+        DBUtils.closeConnection(conn);
+      }
+
+      reloadNV();
+    }
+  }
+
+
+  public void addNV(){
+
+  }
+  public void updateNV(){}
 }
