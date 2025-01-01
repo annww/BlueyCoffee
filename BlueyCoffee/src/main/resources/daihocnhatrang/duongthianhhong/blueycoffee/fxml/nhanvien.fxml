@@ -22,7 +22,7 @@
                 <ComboBox fx:id="cbbTrangThaiFind" layoutX="103.0" layoutY="122.0" prefHeight="26.0" prefWidth="270.0" />
                 <Text layoutX="20.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chức vụ:" />
                 <ComboBox fx:id="cbbChucVuFind" layoutX="103.0" layoutY="165.0" prefHeight="26.0" prefWidth="186.0" />
-                <Button fx:id="btnFind" layoutX="297.0" layoutY="163.0" mnemonicParsing="false" styleClass="secondary_button" text="Tìm kiếm" />
+                <Button fx:id="btnFind" layoutX="297.0" layoutY="163.0" mnemonicParsing="false" onAction="#findNV" styleClass="secondary_button" text="Tìm kiếm" />
                 <TableView fx:id="tableView_ttinNV" layoutX="9.0" layoutY="208.8" onMouseClicked="#displaySelectedNV" prefHeight="308.0" prefWidth="343.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="209.0">
                     <columns>
                         <TableColumn fx:id="col_maNV" prefWidth="46.4" text="Mã" />

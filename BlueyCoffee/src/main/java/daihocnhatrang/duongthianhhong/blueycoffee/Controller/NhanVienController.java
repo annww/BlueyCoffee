@@ -118,7 +118,8 @@ public class NhanVienController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     getCVfromDB();
-    hienThiNV();
+    nhanViens = getNhanViens("SELECT * FROM nhanvien");
+    hienThiNV(getNhanViens("SELECT * FROM nhanvien"));
     ToggleGroup genderGroup = new ToggleGroup();
     radioNam.setToggleGroup(genderGroup);
     radioNu.setToggleGroup(genderGroup);
@@ -184,10 +185,9 @@ public class NhanVienController implements Initializable {
     return nvList;
   }
 
-  public void hienThiNV() {
-    ObservableList<NhanVien> nhanViens = getNhanViens("SELECT * FROM nhanvien");
+  public void hienThiNV(ObservableList<NhanVien> nviens) {
+    ObservableList<NhanVien> nhanViens = nviens;
 
-    // Kiểm tra danh sách dữ liệu
     System.out.println("Danh sách nhân viên: " + nhanViens.size());
     for (NhanVien nv : nhanViens) {
       System.out.println(nv.getTenNV());
@@ -371,7 +371,72 @@ public class NhanVienController implements Initializable {
       DBUtils.closeConnection(conn);
     }
   }
-  public void updateNV(){
-    
+  public void updateNV() {
+    if (txtMaNV.getText().isEmpty() || txtTenNV.getText().isEmpty() ||
+        (!radioNam.isSelected() && !radioNu.isSelected()) ||
+        dateNgaySinh.getValue() == null || txtEmail.getText().isEmpty() ||
+        txtPhoneNum.getText().isEmpty() || cbbChucVu.getValue() == null ||
+        cbbTrangThai.getValue() == null) {
+      setAlert(Alert.AlertType.ERROR, "Lỗi", "Hãy nhập đủ thông tin cần cập nhật!");
+      return;
+    }
+
+    String maNV = txtMaNV.getText();
+    String tenNV = txtTenNV.getText();
+    boolean gioiTinh = setRadioGender();
+    Date ngaySinh = Date.valueOf(dateNgaySinh.getValue());
+    int maChucVu = getMaCV(cbbChucVu);
+    String sdt = txtPhoneNum.getText();
+    String email = txtEmail.getText();
+    String path = Current_data.path != null ? Current_data.path.replace("\\", "\\\\") : null;
+    boolean isWorking = cbbTrangThai.getSelectionModel().getSelectedIndex() == 0;
+
+    String sqlUpdate = "UPDATE nhanvien SET tenNV = ?, gioiTinh = ?, ngaySinh = ?, chucVu = ?, SDT = ?, email = ?, anhNV = ?, isWorking = ? WHERE maNV = ?";
+
+    try (Connection conn = DBUtils.openConnection();
+         PreparedStatement prepare = conn.prepareStatement(sqlUpdate)) {
+
+      prepare.setString(1, tenNV);
+      prepare.setBoolean(2, gioiTinh);
+      prepare.setDate(3, ngaySinh);
+      prepare.setInt(4, maChucVu);
+      prepare.setString(5, sdt);
+      prepare.setString(6, email);
+      prepare.setString(7, path);
+      prepare.setBoolean(8, isWorking);
+      prepare.setString(9, maNV);
+
+      int rowsAffected = prepare.executeUpdate();
+      if (rowsAffected > 0) {
+        setAlert(Alert.AlertType.INFORMATION, "Thành công", "Cập nhật thông tin nhân viên thành công!");
+      } else {
+        setAlert(Alert.AlertType.WARNING, "Thông báo", "Không tìm thấy nhân viên để cập nhật!");
+      }
+      reloadNV();
+    } catch (SQLException e) {
+      setAlert(Alert.AlertType.ERROR, "Lỗi", "Đã xảy ra lỗi khi cập nhật nhân viên: " + e.getMessage());
+      e.printStackTrace();
+    }
   }
+
+  public void findNV() {
+    hienThiNV(getNhanViens("SELECT * FROM nhanvien"));;
+    String maLoai = cbbChucVuFind.getValue();
+    String trangThai = cbbTrangThaiFind.getValue();
+    String tenNV = txtTenNVFind.getText();
+    ObservableList<NhanVien> nhanViensFind = FXCollections.observableArrayList();
+    if (tenNV.isEmpty() && (trangThai == null || trangThai.isEmpty() && (maLoai == null || maLoai.isEmpty()))) {
+      hienThiNV(getNhanViens("SELECT * FROM nhanvien"));
+      return;
+    }
+
+    for (NhanVien nv : nhanViens) {
+      if (nv.getTenNV().toLowerCase().contains(tenNV.toLowerCase()) &&
+          (maLoai == null || nv.getChucVu().equals(maLoai)) && (trangThai == null || nv.getIsWorking().equals(trangThai))) {
+        nhanViensFind.add(nv);
+      }
+    }
+    hienThiNV(nhanViensFind);
+  }
+
 }
