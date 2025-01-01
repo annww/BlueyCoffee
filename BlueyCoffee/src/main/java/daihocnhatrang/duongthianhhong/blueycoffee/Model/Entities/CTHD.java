@@ -1,23 +1,36 @@
 package daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities;
 
 public class CTHD {
-  private String tenSP, ghiChu, maSP;
+  private String maHD, maSP, tenSP, ghiChu;
   private int donGia, soLuong, thanhTien;
 
   // Constructor
-  public CTHD(String maSP, String tenSP, String ghiChu, int donGia, int soLuong) {
+  public CTHD(String maHD, String maSP, String tenSP, int donGia, int soLuong, String ghiChu) {
+    this.maHD = maHD;
     this.maSP = maSP;
     this.tenSP = tenSP;
-    this.ghiChu = ghiChu;
     this.donGia = donGia;
     this.soLuong = soLuong;
+    this.ghiChu = ghiChu;
     updateThanhTien();  // Tính thanh tiền khi khởi tạo
   }
 
-  public CTHD(String maSP, String tenSP, String anhSP, int donGia, int soLuong, int donGia1, String s) {
+  public CTHD(String maSP, String tenSP, String tenSP1, int donGia, int soLuong) {
+    this.maSP = maSP;
+    this.tenSP = tenSP;
+    this.donGia = donGia;
+    this.soLuong = soLuong;
   }
 
   // Getter và Setter cho các thuộc tính
+  public String getMaHD() {
+    return maHD;
+  }
+
+  public void setMaHD(String maHD) {
+    this.maHD = maHD;
+  }
+
   public String getMaSP() {
     return maSP;
   }

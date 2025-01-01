@@ -256,14 +256,14 @@ public class BanHangController implements Initializable {
       AlertUtils.setAlert(Alert.AlertType.ERROR, "Lỗi", "Hãy điền đủ thông tin hóa đơn");
     } else {
       maHD = taoMaHD();
-      String maNV = Current_data.userid;
+      String tenNV = Current_data.username;
       System.out.println(maHD);
       conn = DBUtils.openConnection();
       String sqlInsertHD = "INSERT INTO `hoadon`(`maHD`, `nguoiTao`, `tongTien`,`thanhToan`, `ghiChu`) VALUES (?,?,?,?,?)";
       try {
         prepare = conn.prepareStatement(sqlInsertHD);
         prepare.setString(1, maHD);
-        prepare.setString(2, maNV);
+        prepare.setString(2, tenNV);
         prepare.setInt(3, Integer.parseInt(tongtienHD.getText()));
         prepare.setString(4, cbBoxThanhToan.getValue());
         prepare.setString(5, "");
@@ -313,15 +313,16 @@ public class BanHangController implements Initializable {
 
 
   private void taoCTHD(String maHD) throws SQLException {
-    String sqlInsertCTHD = "INSERT INTO `cthd`(`maHD`, `maSP`, `donGia` ,`soLuong`, `thanhTien`, `ghiChu`) VALUES (?,?,?,?,?,?)";
+    String sqlInsertCTHD = "INSERT INTO `cthd`(`maHD`, `maSP`, `tenSP`,`donGia` ,`soLuong`, `thanhTien`, `ghiChu`) VALUES (?,?,?,?,?,?,?)";
     for (CTHD cthd : cthds) {
       prepare = conn.prepareStatement(sqlInsertCTHD);
       prepare.setString(1, maHD);
       prepare.setString(2, cthd.getMaSP());
-      prepare.setInt(3, cthd.getDonGia());
-      prepare.setInt(4, cthd.getSoLuong());
-      prepare.setInt(5, cthd.getThanhTien());
-      prepare.setString(6, cthd.getGhiChu());
+      prepare.setString(3, cthd.getTenSP());
+      prepare.setInt(4, cthd.getDonGia());
+      prepare.setInt(5, cthd.getSoLuong());
+      prepare.setInt(6, cthd.getThanhTien());
+      prepare.setString(7, cthd.getGhiChu());
       prepare.executeUpdate();
     }
   }

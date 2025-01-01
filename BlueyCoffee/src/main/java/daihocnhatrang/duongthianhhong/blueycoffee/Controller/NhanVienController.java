@@ -409,6 +409,14 @@ public class NhanVienController implements Initializable {
       int rowsAffected = prepare.executeUpdate();
       if (rowsAffected > 0) {
         setAlert(Alert.AlertType.INFORMATION, "Thành công", "Cập nhật thông tin nhân viên thành công!");
+        for(NhanVien nhanvien : nhanViens){
+          if(nhanvien.getMaNV().equals(Current_data.id)){
+            nhanvien.setIsWorking(isWorking ? "Đang làm": "Nghỉ làm");
+            nhanvien.setChucVu(loaiCVs.get(maChucVu));
+            nhanvien.setTenNV(txtTenNV.getText());
+            break;
+          }
+        }
       } else {
         setAlert(Alert.AlertType.WARNING, "Thông báo", "Không tìm thấy nhân viên để cập nhật!");
       }
