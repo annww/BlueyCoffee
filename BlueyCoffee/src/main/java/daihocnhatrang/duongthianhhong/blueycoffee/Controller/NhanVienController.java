@@ -17,10 +17,9 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.net.URL;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static daihocnhatrang.duongthianhhong.blueycoffee.Utils.AlertUtils.setAlert;
 
@@ -107,7 +106,6 @@ public class NhanVienController implements Initializable {
   @FXML
   private AnchorPane nhanVien;
 
-  private HashMap<String, String> loainvs = new HashMap<>();
   private String[] trangthainvs = new String[]{"Đang làm", "Nghỉ làm"};
   private Connection conn;
   private PreparedStatement prepare;
@@ -126,6 +124,7 @@ public class NhanVienController implements Initializable {
     radioNu.setToggleGroup(genderGroup);
 
     radioNam.setSelected(true);
+    hienThiCVTrangThai();
   }
 
   public void getCVfromDB(){
@@ -141,6 +140,9 @@ public class NhanVienController implements Initializable {
         loaiCVs.put(maCV, loaiCV);
       }
       System.out.println(loaiCVs.values());
+      ObservableList list = FXCollections.observableArrayList(loaiCVs.values());
+      cbbChucVuFind.setItems(list);
+      cbbChucVu.setItems(list);
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
@@ -201,6 +203,17 @@ public class NhanVienController implements Initializable {
     tableView_ttinNV.setItems(nhanViens);
   }
 
+  public void hienThiCVTrangThai() {
+      List<String> listTT = new ArrayList<>();
+      for(String trangthai : trangthainvs){
+        listTT.add(trangthai);
+      }
+      ObservableList listTrangThai = FXCollections.observableArrayList(listTT);
+      cbbTrangThai.setItems(listTrangThai);
+      cbbTrangThai.getSelectionModel().select(0);
+      cbbTrangThaiFind.setItems(listTrangThai);
+  }
+
   public void importImage() {
     FileChooser openFile = new FileChooser();
     openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File", "*png", "*jpg"));
@@ -243,6 +256,17 @@ public class NhanVienController implements Initializable {
     cbbTrangThai.getSelectionModel().select(selectedItem.getIsWorking()=="Đang làm"?0:1);
   }
 
+  public int getMaCV(ComboBox<String> cbbChucVu) {
+    String selectedLoai = cbbChucVu.getSelectionModel().getSelectedItem();
+    for (int key : loaiCVs.keySet()) {
+      if (loaiCVs.get(key).equals(selectedLoai)) {
+        return key;
+      }
+    }
+    return 0;
+  }
+
+
   public void reloadNV() {
     txtMaNV.setText("");
     txtTenNV.setText("");
@@ -259,7 +283,6 @@ public class NhanVienController implements Initializable {
     cbbTrangThaiFind.setValue(null);
 
     Current_data.id = "";
-
     ObservableList<NhanVien> nhanViens = getNhanViens("SELECT * FROM nhanvien");
     tableView_ttinNV.setItems(nhanViens);
   }
@@ -267,7 +290,7 @@ public class NhanVienController implements Initializable {
   public boolean setRadioGender() {
     return radioNam.isSelected();
   }
-  
+
   public void deleteNV() {
     if (Current_data.id == null || Current_data.id.isEmpty()) {
       setAlert(Alert.AlertType.ERROR, "Lỗi", "Hãy chọn nhân viên cần xóa!");
@@ -299,10 +322,56 @@ public class NhanVienController implements Initializable {
       reloadNV();
     }
   }
+  public void addNV() {
+    if (txtTenNV.getText().isEmpty() ||
+        (!radioNam.isSelected() && !radioNu.isSelected()) ||
+        dateNgaySinh.getValue() == null || txtEmail.getText().isEmpty() ||
+        txtPhoneNum.getText().isEmpty() ||
+        Current_data.path == null) {
+      setAlert(Alert.AlertType.ERROR, "Lỗi", "Hãy nhập đủ thông tin nhân viên!");
+      return;
+    }
 
+    try {
+      String tenNV = txtTenNV.getText();
+      boolean gioiTinh = setRadioGender();
+      Date ngaySinh = Date.valueOf(dateNgaySinh.getValue());
+      int maChucVu = getMaCV(cbbChucVu);
+      String sdt = txtPhoneNum.getText();
+      String email = txtEmail.getText();
+      String path = Current_data.path.replace("\\", "\\\\");
+      boolean isWorking = cbbTrangThai.getSelectionModel().getSelectedIndex() == 0;
 
-  public void addNV(){
+      String sqlInsert = "INSERT INTO nhanvien ( tenNV, gioiTinh, ngaySinh, chucVu, SDT, email, anhNV, isWorking, username, password) " +
+          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+      conn = DBUtils.openConnection();
+      prepare = conn.prepareStatement(sqlInsert);
+      prepare.setString(1, tenNV);
+      prepare.setBoolean(2, gioiTinh);
+      prepare.setDate(3, ngaySinh);
+      prepare.setInt(4, maChucVu);
+      prepare.setString(5, sdt);
+      prepare.setString(6, email);
+      prepare.setString(7, path);
+      prepare.setBoolean(8, isWorking);
+      prepare.setString(9, email);
+      prepare.setString(10, sdt);
+
+      int rowsAffected = prepare.executeUpdate();
+      if (rowsAffected > 0) {
+        setAlert(Alert.AlertType.INFORMATION, "Thành công", "Đã thêm nhân viên mới thành công!");
+      }
+
+      reloadNV();
+    } catch (SQLException e) {
+      setAlert(Alert.AlertType.ERROR, "Lỗi", "Đã xảy ra lỗi khi thêm nhân viên: " + e.getMessage());
+      e.printStackTrace();
+    } finally {
+      DBUtils.closeConnection(conn);
+    }
   }
-  public void updateNV(){}
+  public void updateNV(){
+    
+  }
 }
