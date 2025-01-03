@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -92,6 +93,7 @@ public class HoaDonController implements Initializable {
   private PreparedStatement prepare;
   private String sqlSelectOrder = "SELECT * FROM hoadon";
   private String sqlSelectWaiting = "SELECT * FROM hoadon WHERE `trangThai` = 1";
+  private ObservableList<HoaDon> hoaDons;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -249,4 +251,61 @@ public class HoaDonController implements Initializable {
     tbView_HoaDon.setItems(hoaDons);
   }
 
+  public void findBtn() {
+    String maHD = txtMaHD.getText().trim();
+    LocalDate dateStart = dateFromDate.getValue();
+    LocalDate dateEnd = dateToDate.getValue();
+
+    if (maHD.isEmpty() && dateStart == null && dateEnd == null) {
+      showHoaDonList(sqlSelectOrder, null); // Hiển thị toàn bộ danh sách
+      return;
+    }
+
+    // lọc lại ds từ csdl
+    StringBuilder query = new StringBuilder("SELECT * FROM hoadon WHERE 1=1");
+    if (!maHD.isEmpty()) {
+      query.append(" AND maHD LIKE ?");
+    }
+    if (dateStart != null) {
+      query.append(" AND createdAt >= ?");
+    }
+    if (dateEnd != null) {
+      query.append(" AND createdAt <= ?");
+    }
+
+    ObservableList<HoaDon> hoaDonsF = FXCollections.observableArrayList();
+    try (Connection conn = DBUtils.openConnection();
+         PreparedStatement prepare = conn.prepareStatement(query.toString())) {
+      int paramIndex = 1;
+      if (!maHD.isEmpty()) {
+        prepare.setString(paramIndex++, "%" + maHD + "%");
+      }
+      if (dateStart != null) {
+        prepare.setDate(paramIndex++, Date.valueOf(dateStart));
+      }
+      if (dateEnd != null) {
+        prepare.setDate(paramIndex++, Date.valueOf(dateEnd));
+      }
+
+      try (ResultSet result = prepare.executeQuery()) {
+        while (result.next()) {
+          HoaDon hoaDon = new HoaDon(
+              result.getString("maHD"),
+              result.getString("nguoiTao"),
+              result.getTimestamp("createdAt"),
+              result.getTimestamp("confirmAt"),
+              result.getInt("tongTien"),
+              result.getString("thanhToan"),
+              result.getString("ghiChu")
+          );
+          hoaDonsF.add(hoaDon);
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    showHoaDonList(null, hoaDonsF);
+  }
 }
+
