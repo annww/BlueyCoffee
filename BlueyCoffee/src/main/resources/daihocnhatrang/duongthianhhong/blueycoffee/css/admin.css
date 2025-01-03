@@ -34,7 +34,9 @@
 .white-bg:{
     -fx-background-color: #fff;
 }
-
+.pink_bg{
+    -fx-background-color: #F6CAE5;
+}
 .table-view{
 -fx-background-color: transparent;
 -fx-padding: 0;

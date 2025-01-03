@@ -1,0 +1,16 @@
+.shadow {
+    -fx-background-color: #BBD8EC;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+.shadow:hover {
+    -fx-background-color: #9DCBEB;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+}
+
+bg_color{
+    -fx-background-color: #F6CAE5;
+}
