@@ -1,0 +1,12 @@
+.tittle{
+    -fx-font-size: 26px;
+    -fx-background-color:62A2CF;
+}
+
+.input{
+-fx-background-color: #f1f1f1;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    }

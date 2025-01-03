@@ -1,150 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import java.lang.String?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.Controller.ThongKeController"
-            prefHeight="400.0" prefWidth="600.0">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daihocnhatrang.duongthianhhong.blueycoffee.Controller.ThongKeController">
     <children>
-        <AnchorPane layoutX="11.0" layoutY="14.0" prefHeight="178.0" prefWidth="859.0" stylesheets="@../css/admin.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+        <AnchorPane layoutX="15.2" layoutY="14.0" prefHeight="194.0" prefWidth="830.0" style="-fx-background-radius: 8px; -fx-background-color: white;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
             <children>
-                <ScrollPane layoutX="135.0" layoutY="-11.0" prefHeight="189.6" prefWidth="859.2" style="-fx-background-color: F7E5F0;" styleClass="trasparent" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <content>
-                        <AnchorPane prefHeight="163.0" prefWidth="1006.0" stylesheets="@../css/admin.css">
+                <AnchorPane layoutX="11.0" layoutY="14.0" prefHeight="178.0" prefWidth="859.0" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="215.20000000000002" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                    <children>
+                        <ScrollPane layoutX="135.0" layoutY="-11.0" prefHeight="189.6" prefWidth="859.2" style="-fx-background-color: F7E5F0;" styleClass="trasparent" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <content>
+                                <AnchorPane prefHeight="163.0" prefWidth="1006.0" stylesheets="@../css/admin.css">
+                                    <children>
+                                        <!-- Tong don trong ngay -->
+                                        <AnchorPane layoutX="21.0" layoutY="9.0" prefHeight="142.0" prefWidth="263.0" styleClass="shadow" stylesheets="@../css/product.css" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="15.999999999999972">
+                                            <children>
+                                                <ImageView fitHeight="61.0" fitWidth="66.0" layoutX="174.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../img/coffeelogo.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="160.0" text="Tổng đơn trong ngày" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="24.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="15.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label fx:id="totalOrderToday" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="57.0" prefHeight="39.0" prefWidth="165.0" text="0" AnchorPane.leftAnchor="15.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </AnchorPane>
+
+                                        <!-- Thu nhap trong ngay -->
+                                        <AnchorPane layoutX="312.0" layoutY="9.0" prefHeight="142.0" prefWidth="263.0" styleClass="shadow" stylesheets="@../css/product.css" AnchorPane.bottomAnchor="5.0">
+                                            <children>
+                                                <ImageView fitHeight="61.0" fitWidth="66.0" layoutX="174.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../img/coffeelogo.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="160.0" text="Thu nhập trong ngày" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="24.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="15.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label fx:id="incomeToday" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="57.0" prefHeight="39.0" prefWidth="165.0" text="0" AnchorPane.leftAnchor="15.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </AnchorPane>
+
+                                        <!-- Tong thu nhap -->
+                                        <AnchorPane layoutX="600.0" layoutY="9.0" prefHeight="142.0" prefWidth="263.0" styleClass="shadow" stylesheets="@../css/product.css" AnchorPane.bottomAnchor="5.0">
+                                            <children>
+                                                <ImageView fitHeight="61.0" fitWidth="66.0" layoutX="174.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../img/coffeelogo.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="160.0" text="Tổng thu nhập" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="24.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="15.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label fx:id="incomeTotal" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="57.0" prefHeight="39.0" prefWidth="165.0" text="0" AnchorPane.leftAnchor="15.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </AnchorPane>
+
+                                        <!-- Tong don-->
+                                        <AnchorPane layoutX="891.0" layoutY="9.0" prefHeight="142.0" prefWidth="263.0" styleClass="shadow" stylesheets="@../css/product.css" AnchorPane.bottomAnchor="5.0">
+                                            <children>
+                                                <ImageView fitHeight="61.0" fitWidth="66.0" layoutX="174.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../img/coffeelogo.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="160.0" text="Tổng đơn" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="24.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="15.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label fx:id="totalOrder" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="57.0" prefHeight="39.0" prefWidth="165.0" text="0" AnchorPane.leftAnchor="15.0">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </AnchorPane>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                    <styleClass>
+                        <String fx:value="shadow" />
+                        <String fx:value="pink_bg" />
+                    </styleClass>
+                </AnchorPane>
+                <AnchorPane layoutX="11.0" layoutY="206.0" prefHeight="342.0" prefWidth="859.0" styleClass="shadow" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="212.0">
+                    <children>
+                        <AnchorPane layoutX="418.4" layoutY="16.0" prefHeight="354.0" prefWidth="398.0" styleClass="shadow" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="418.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
                             <children>
-                                <!-- AnchorPane 1 -->
-                                <AnchorPane layoutX="21.0" layoutY="9.0" prefHeight="142.0" prefWidth="263.0" styleClass="shadow" stylesheets="@../css/product.css" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="15.999999999999972">
-                                    <children>
-                                        <ImageView fitHeight="61.0" fitWidth="66.0" layoutX="174.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../img/coffeelogo.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="160.0" text="Tổng đơn trong ngày" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="24.0">
-                                            <font>
-                                                <Font name="System Bold" size="15.0" />
-                                            </font>
-                                        </Label>
-                                        <Label fx:id="totalOrderToday" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="57.0" prefHeight="39.0" prefWidth="165.0" text="0" AnchorPane.leftAnchor="15.0">
-                                            <font>
-                                                <Font name="System Bold" size="20.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </AnchorPane>
-
-                                <!-- AnchorPane 2 -->
-                                <AnchorPane layoutX="312.0" layoutY="9.0" prefHeight="142.0" prefWidth="263.0" styleClass="shadow" stylesheets="@../css/product.css" AnchorPane.bottomAnchor="5.0">
-                                    <children>
-                                        <ImageView fitHeight="61.0" fitWidth="66.0" layoutX="174.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../img/coffeelogo.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="160.0" text="Thu nhập trong ngày" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="24.0">
-                                            <font>
-                                                <Font name="System Bold" size="15.0" />
-                                            </font>
-                                        </Label>
-                                        <Label fx:id="incomeToday" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="57.0" prefHeight="39.0" prefWidth="165.0" text="0" AnchorPane.leftAnchor="15.0">
-                                            <font>
-                                                <Font name="System Bold" size="20.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </AnchorPane>
-
-                                <!-- AnchorPane 3 -->
-                                <AnchorPane layoutX="600.0" layoutY="9.0" prefHeight="142.0" prefWidth="263.0" styleClass="shadow" stylesheets="@../css/product.css" AnchorPane.bottomAnchor="5.0">
-                                    <children>
-                                        <ImageView fitHeight="61.0" fitWidth="66.0" layoutX="174.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../img/coffeelogo.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="160.0" text="Tổng thu nhập" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="24.0">
-                                            <font>
-                                                <Font name="System Bold" size="15.0" />
-                                            </font>
-                                        </Label>
-                                        <Label fx:id="incomeTotal" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="57.0" prefHeight="39.0" prefWidth="165.0" text="0" AnchorPane.leftAnchor="15.0">
-                                            <font>
-                                                <Font name="System Bold" size="20.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </AnchorPane>
-
-                                <!-- AnchorPane 4 -->
-                                <AnchorPane layoutX="891.0" layoutY="9.0" prefHeight="142.0" prefWidth="263.0" styleClass="shadow" stylesheets="@../css/product.css" AnchorPane.bottomAnchor="5.0">
-                                    <children>
-                                        <ImageView fitHeight="61.0" fitWidth="66.0" layoutX="174.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../img/coffeelogo.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="160.0" text="Tổng đơn" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="24.0">
-                                            <font>
-                                                <Font name="System Bold" size="15.0" />
-                                            </font>
-                                        </Label>
-                                        <Label fx:id="totalOrder" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="57.0" prefHeight="39.0" prefWidth="165.0" text="0" AnchorPane.leftAnchor="15.0">
-                                            <font>
-                                                <Font name="System Bold" size="20.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </AnchorPane>
+                                <AreaChart fx:id="incomeChart" layoutY="-48.0" prefHeight="311.0" prefWidth="604.0" stylesheets="@../css/product.css" title="Thu nhập" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                    </yAxis>
+                                </AreaChart>
                             </children>
                         </AnchorPane>
-                    </content>
-                </ScrollPane>
-            </children>
-            <styleClass>
-                <String fx:value="shadow" />
-                <String fx:value="pink_bg" />
-            </styleClass>
-        </AnchorPane>
-        <AnchorPane layoutX="11.0" layoutY="206.0" prefHeight="342.0" prefWidth="859.0" styleClass="shadow" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="212.0">
-            <children>
-                <AnchorPane layoutX="418.4" layoutY="16.0" prefHeight="354.0" prefWidth="398.0" styleClass="shadow" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="418.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
-                    <children>
-                        <AreaChart fx:id="incomeChart" layoutY="-48.0" prefHeight="311.0" prefWidth="604.0" title="Thu nhập" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <xAxis>
-                                <CategoryAxis side="BOTTOM" />
-                            </xAxis>
-                            <yAxis>
-                                <NumberAxis side="LEFT" />
-                            </yAxis>
-                        </AreaChart>
+                        <AnchorPane layoutX="14.0" layoutY="16.0" prefHeight="354.0" prefWidth="391.0" style="-fx-background-color: white;" styleClass="shadow" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+                            <children>
+                                <BarChart fx:id="orderChart" layoutX="284.8" layoutY="-48.0" prefHeight="352.0000000000001" prefWidth="282.0" style="-fx-alternative-column-fill-visible: F7E5F0;" title="Đơn hàng" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" stylesheets="@../css/product.css" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" stylesheets="@../css/product.css" />
+                                    </yAxis>
+                                </BarChart>
+                            </children>
+                        </AnchorPane>
                     </children>
                 </AnchorPane>
-                <AnchorPane layoutX="14.0" layoutY="16.0" prefHeight="354.0" prefWidth="391.0" style="-fx-background-color: white;" styleClass="shadow" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
-                    <children>
-                        <BarChart fx:id="orderChart" layoutX="284.8" layoutY="-48.0" prefHeight="352.0000000000001" prefWidth="282.0" title="Đơn hàng" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <xAxis>
-                                <CategoryAxis side="BOTTOM" />
-                            </xAxis>
-                            <yAxis>
-                                <NumberAxis side="LEFT" />
-                            </yAxis>
-                        </BarChart>
-                    </children>
-                </AnchorPane>
+                <Separator layoutX="14.0" layoutY="201.0" prefHeight="4.0" prefWidth="854.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="201.0" />
             </children>
         </AnchorPane>
-        <Separator layoutX="14.0" layoutY="201.0" prefHeight="4.0" prefWidth="854.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="201.0" />
     </children>
 </AnchorPane>

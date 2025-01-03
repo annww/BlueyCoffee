@@ -17,33 +17,33 @@
             <ImageView fitHeight="600.0" fitWidth="302.0" layoutY="1.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.17739868164062">
               <Image url="@../img/bluey.jpg" />
             </ImageView>
-            <Text layoutX="87.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tạo tài khoản mới">
+            <Text fill="#1977d1" layoutX="81.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tạo tài khoản mới">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold Italic" size="16.0" />
                </font>
             </Text>
       
                 <!-- Nút hành động -->
-          <Button fx:id="btnSignUp" layoutX="59.0" layoutY="508.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="182.0" style="-fx-background-color: lightgrey; -fx-background-radius: 15; -fx-padding: 10; -fx-font-size: 14px;" text="Đăng ký" />
+          <Button fx:id="btnSignUp" layoutX="59.0" layoutY="508.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="182.0" style="-fx-background-radius: 15;" styleClass="secondary_button" stylesheets="@../css/admin.css" text="Đăng ký" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="319.0" layoutY="17.0" prefHeight="600.0" prefWidth="282.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="319.0" layoutY="17.0" prefHeight="600.0" prefWidth="282.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
           <!-- Tiêu đề -->
-          <Text fill="darkblue" layoutX="62.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ĐĂNG NHẬP" textAlignment="CENTER" wrappingWidth="181.6031494140625">
+          <Text fill="#1977d1" layoutX="62.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ĐĂNG NHẬP" textAlignment="CENTER" wrappingWidth="181.6031494140625">
             <font>
-              <Font size="26.0" />
+              <Font name="System Bold" size="26.0" />
             </font>
           </Text>
-          <TextField fx:id="username" layoutX="137.0" layoutY="215.0" prefHeight="30.0" prefWidth="147.0" style="-fx-background-radius: 15; -fx-padding: 5;" />
+          <TextField fx:id="username" layoutX="142.0" layoutY="234.0" prefHeight="30.0" prefWidth="147.0" style="-fx-background-radius: 10; -fx-padding: 7; -fx-border-color: 88C0E8;" />
       
-          <Text fill="black" layoutX="31.0" layoutY="318.0" text="Mật khẩu">
+          <Text fill="#1977d1" layoutX="15.0" layoutY="308.0" text="Mật khẩu">
             <font>
               <Font size="16.0" />
             </font>
           </Text>
-          <PasswordField fx:id="pass" layoutX="137.0" layoutY="301.0" prefHeight="30.0" prefWidth="147.0" style="-fx-background-radius: 15; -fx-padding: 5;" />
-          <Button fx:id="btnlogin" layoutX="88.0" layoutY="392.0" mnemonicParsing="false" onAction="#Login" prefHeight="21.0" prefWidth="147.0" style="-fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 15; -fx-padding: 10; -fx-font-size: 14px;" text="Đăng nhập" />
+          <PasswordField fx:id="pass" layoutX="142.0" layoutY="285.0" prefHeight="30.0" prefWidth="147.0" style="-fx-background-radius: 10; -fx-padding: 7;" />
+          <Button fx:id="btnlogin" layoutX="96.0" layoutY="386.0" mnemonicParsing="false" onAction="#Login" prefHeight="42.0" prefWidth="147.0" style="-fx-background-radius: 15;" styleClass="secondary_button" stylesheets="@../css/admin.css" text="Đăng nhập" />
       
           <!-- Thông báo lỗi -->
           <Text fx:id="errorMessage" fill="red" text=" " visible="false">
@@ -51,10 +51,10 @@
               <Font size="14.0" />
             </font>
           </Text>
-            <Hyperlink layoutX="188.0" layoutY="348.0" text="Quên mật khẩu?" />
+            <Hyperlink fx:id="forgetPass" layoutX="196.0" layoutY="329.0" text="Quên mật khẩu?" />
       
                 <!-- Label và trường nhập liệu -->
-          <Text fill="black" layoutX="11.0" layoutY="236.0" text="Tên đăng nhập">
+          <Text fill="#1977d1" layoutX="16.0" layoutY="255.0" text="Tên đăng nhập">
             <font>
               <Font size="16.0" />
             </font>

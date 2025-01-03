@@ -1,5 +1,6 @@
 package daihocnhatrang.duongthianhhong.blueycoffee.Controller;
 
+import daihocnhatrang.duongthianhhong.blueycoffee.Model.Entities.NhanVien;
 import daihocnhatrang.duongthianhhong.blueycoffee.Utils.DBUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +46,7 @@ public class HomeController implements Initializable {
   AnchorPane thongKeForm;
   @FXML
   AnchorPane sanPhamform;
+
   private String username, chucVu;
 
   @FXML
@@ -62,10 +64,20 @@ public class HomeController implements Initializable {
     } else {
       System.err.println("Mã nhân viên không tồn tại. Không thể tải ảnh.");
     }
+    checkQuyen();
   }
 
   @FXML
   private Alert alert;
+
+
+  private void checkQuyen(){
+    if(Current_data.chucVu.equals("Admin")){
+    } else {
+      btnHoaDon.setDisable(true);
+      btnThongKe.setDisable(true);
+    }
+  }
 
   @FXML
   public void logout() {
