@@ -85,7 +85,6 @@ public class SanPhamController implements Initializable {
   private AnchorPane sanPham;
 
   private HashMap<String, String> loaisps = new HashMap<>();
-  private ObservableList<SanPham> cardList = FXCollections.observableArrayList();
   private Connection conn;
   private PreparedStatement prepare;
   private Statement statement;
@@ -314,9 +313,8 @@ public class SanPhamController implements Initializable {
         Optional<ButtonType> optional = setAlert(Alert.AlertType.CONFIRMATION, "Xác nhận",
             "Bạn có chắc muốn thêm mới sản phẩm " + tenSP.getText() + "?");
         if (optional.get().equals(ButtonType.OK)) {
-          // Chuẩn bị câu lệnh và thực thi
           prepare = conn.prepareStatement(sqlInsert);
-          String maSP = setMaSP(loaiSP);  // Lấy mã sản phẩm mới
+          String maSP = setMaSP(loaiSP);
           prepare.setString(1, maSP);
           prepare.setString(2, tenSP.getText());
           prepare.setString(3, maLoai);
@@ -378,18 +376,16 @@ public class SanPhamController implements Initializable {
     int isSellMoi = trangThai.getSelectionModel().getSelectedItem().equals("Đang bán") ? 1 : 0;
 
     // Cập nhật đường dẫn ảnh mới nếu có
-    String pathMoi = Current_data.path != null ? Current_data.path.replace("\\", "\\\\").trim() : null;
+    String pathMoi = Current_data.path != null ? Current_data.path.trim() : null;
 
     conn = DBUtils.openConnection();
     try {
-      // Lấy thông tin hiện tại của sản phẩm từ cơ sở dữ liệu
       String sqlSelect = "SELECT tenSP, loaiSP, donGia, anhSP, trangThai FROM sanpham WHERE maSP = ?";
       prepare = conn.prepareStatement(sqlSelect);
       prepare.setString(1, Current_data.id);
       result = prepare.executeQuery();
 
       if (result.next()) {
-        // Lấy dữ liệu cũ từ cơ sở dữ liệu
         String tenSPOld = result.getString("tenSP").trim();
         String loaiSPOld = result.getString("loaiSP").trim();
         String donGiaOld = result.getString("donGia").trim();

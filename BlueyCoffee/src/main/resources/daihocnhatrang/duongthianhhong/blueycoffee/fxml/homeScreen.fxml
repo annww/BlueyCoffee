@@ -23,7 +23,7 @@
                      <children>
                         <AnchorPane prefHeight="600.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="20.0" prefHeight="230.0" prefWidth="240.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <AnchorPane layoutX="20.0" prefHeight="230.0" prefWidth="240.0" styleClass="shadow" stylesheets="@../css/admin.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="49.16315307617188" AnchorPane.topAnchor="49.0">
                                        <image>
@@ -44,7 +44,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="btnBanHang" mnemonicParsing="false" onAction="#setBtnBanHang" prefHeight="110.0" prefWidth="240.0" styleClass="nav-button" stylesheets="@../css/admin.css" text="Bán hàng">
+                                    <Button fx:id="btnBanHang" mnemonicParsing="false" onAction="#setBtnBanHang" prefHeight="234.0" prefWidth="269.0" styleClass="nav-button" stylesheets="@../css/admin.css" text="Bán hàng">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin></Button>
@@ -56,7 +56,7 @@
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin></Button>
-                                    <Button fx:id="btnNhanVien" mnemonicParsing="false" onAction="#setBtnNhanVien" prefHeight="85.0" prefWidth="278.0" styleClass="nav-button" stylesheets="@../css/admin.css" text="Nhân viên" GridPane.rowIndex="1">
+                                    <Button fx:id="btnNhanVien" mnemonicParsing="false" onAction="#setBtnNhanVien" prefHeight="234.0" prefWidth="269.0" styleClass="nav-button" stylesheets="@../css/admin.css" text="Nhân viên" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin></Button>
@@ -74,7 +74,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane prefHeight="36.0" prefWidth="860.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane prefHeight="42.0" prefWidth="860.0" style="-fx-background-color: #fff;" stylesheets="@../css/admin.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <ImageView fx:id="imgUser" fitHeight="36.0" fitWidth="36.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.0">
                                  <image>
@@ -85,12 +85,12 @@
                               <Hyperlink fx:id="logOut" layoutX="637.0" layoutY="14.0" onAction="#logout" text="Đăng xuất" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="9.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="banHangform" layoutY="42.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
-                        <AnchorPane fx:id="nhanVienform" layoutX="10.0" layoutY="46.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
-                        <AnchorPane fx:id="sanPhamform" layoutX="10.0" layoutY="40.0" prefHeight="606.0" prefWidth="860.0" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
+                        <AnchorPane fx:id="banHangform" layoutY="50.4" prefHeight="596.0" prefWidth="860.0" style="-fx-background-color: #fff;" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
+                        <AnchorPane fx:id="nhanVienform" layoutX="10.0" layoutY="46.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
+                        <AnchorPane fx:id="sanPhamform" layoutX="10.0" layoutY="40.0" prefHeight="606.0" prefWidth="860.0" style="-fx-background-color: #fff;" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
                            </AnchorPane>
-                        <AnchorPane fx:id="thongKeForm" layoutX="30.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
-                        <AnchorPane fx:id="hoaDonform" layoutX="20.0" layoutY="56.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
+                        <AnchorPane fx:id="thongKeForm" layoutX="30.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
+                        <AnchorPane fx:id="hoaDonform" layoutX="20.0" layoutY="46.4" prefHeight="600.0" prefWidth="852.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
 
                         </AnchorPane>
                      </children>
