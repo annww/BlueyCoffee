@@ -1,6 +1,7 @@
 package daihocnhatrang.duongthianhhong.blueycoffee.Controller;
 
 import daihocnhatrang.duongthianhhong.blueycoffee.Utils.DBUtils;
+import daihocnhatrang.duongthianhhong.blueycoffee.Utils.PriceUtils;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
@@ -38,9 +39,11 @@ public class ThongKeController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     displayTotalOrderToday();
+    displayTotalOrder();
+    displayIncomeTotal();
   }
 
-  public void displayTotalOrderToday() {
+  public void displayTotalOrder() {
     String sql = "SELECT COUNT(maHD) AS total FROM hoadon";
 
     try (Connection conn = DBUtils.openConnection();
@@ -53,7 +56,29 @@ public class ThongKeController implements Initializable {
       }
 
     } catch (SQLException e) {
-      e.printStackTrace(); 
+      e.printStackTrace();
     }
+  }
+
+  public void displayIncomeTotal() {
+    String sql = "SELECT SUM(tongTien) AS totalIncome FROM hoadon WHERE trangThai = 1";
+
+    try (Connection conn = DBUtils.openConnection();
+         PreparedStatement prepare = conn.prepareStatement(sql);
+         ResultSet result = prepare.executeQuery()) {
+
+      if (result.next()) {
+        int tongTien = result.getInt("totalIncome");
+        incomeTotal.setText(PriceUtils.formatPrice(tongTien));
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+
+  public void displayTotalOrderToday(){
+
   }
 }
