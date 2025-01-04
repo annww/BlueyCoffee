@@ -74,8 +74,8 @@ public class HomeController implements Initializable {
   private void checkQuyen(){
     if(Current_data.chucVu.equals("Admin")){
     } else {
-      btnHoaDon.setDisable(true);
-      btnThongKe.setDisable(true);
+      btnNhanVien.setDisable(true);
+      btnSanPham.setDisable(true);
     }
   }
 

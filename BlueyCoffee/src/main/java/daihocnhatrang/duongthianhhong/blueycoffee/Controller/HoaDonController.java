@@ -221,7 +221,10 @@ public class HoaDonController implements Initializable {
       return;
     }
 
-    HoaDon selectedHoaDon = hoaDons.get(0);
+    HoaDon selectedHoaDon = tbView_HoaDon.getSelectionModel().getSelectedItem();
+    if (selectedHoaDon == null) {
+      return;
+    }
 
     lbMaHD.setText(selectedHoaDon.getMaHD());
     lbNguoiTao.setText(selectedHoaDon.getNguoiTao());
@@ -229,27 +232,9 @@ public class HoaDonController implements Initializable {
     lbLoaiTT.setText(selectedHoaDon.getThanhToan());
     tFNote.setText(selectedHoaDon.getGhiChu());
 
-    col_maHD.setCellValueFactory(new PropertyValueFactory<>("maHD"));
-    col_nguoiTao.setCellValueFactory(new PropertyValueFactory<>("nguoiTao"));
-    col_thoiGianTao.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
-    col_tongTien.setCellValueFactory(new PropertyValueFactory<>("tongTien"));
-    col_HDNote.setCellValueFactory(new PropertyValueFactory<>("ghiChu"));
-    col_PTTT.setCellValueFactory(new PropertyValueFactory<>("thanhToan"));
-
-    col_tongTien.setCellFactory(tc -> new TableCell<HoaDon, Integer>() {
-      @Override
-      protected void updateItem(Integer item, boolean empty) {
-        super.updateItem(item, empty);
-        if (empty || item == null) {
-          setText(null);
-        } else {
-          setText(PriceUtils.formatPrice(item));
-        }
-      }
-    });
-
-    tbView_HoaDon.setItems(hoaDons);
+    showHoaDonList(null, hoaDons);
   }
+
 
   public void findBtn() {
     String maHD = txtMaHD.getText().trim();
