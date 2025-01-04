@@ -94,10 +94,16 @@ Các trường hợp đăng nhập thành công, thất bại và không nhập 
 ## Chức năng phân quyền
 Nhân viên chỉ có quyền vào bán hàng, hóa đơn và thống kê
 
-![image](https://github.com/user-attachments/assets/c39df4db-72e7-477e-a297-d7717106cfae)
+![image](https://github.com/user-attachments/assets/5d5c09ad-804d-4a9b-bd4e-bc16dd30dee0)
+
 
 Admin sẽ được truy cập vào tất cả
+![image](https://github.com/user-attachments/assets/7ac9632b-19b6-4c60-84b2-35d047fca7dd)
 
-![image](https://github.com/user-attachments/assets/6aae5e47-2d13-4197-b307-97bc54556c63)
+## Chức năng đăng xuất
+Quay trở lại giao diện login khi đăng xuất
 
+![image](https://github.com/user-attachments/assets/51bee11b-aa67-47e6-b6cf-de54f938ea67)
+
+![image](https://github.com/user-attachments/assets/a15eb6ba-492d-41e3-8a8a-db907949043f)
 
