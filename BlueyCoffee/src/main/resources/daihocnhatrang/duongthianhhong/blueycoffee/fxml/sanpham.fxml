@@ -24,9 +24,9 @@
                 <ComboBox fx:id="loaiSP" layoutX="115.0" layoutY="105.0" prefWidth="150.0" promptText="Chọn loại sản phẩm" />
                 <Label fx:id="donGiaText" layoutX="304.0" layoutY="23.0" text="Đơn giá:" />
                 <TextField fx:id="donGia" layoutX="374.0" layoutY="19.0" />
-                <AnchorPane layoutX="631.0" layoutY="10.0" prefHeight="152.0" prefWidth="155.0" style="-fx-background-color: white;" styleClass="shadow" stylesheets="@../css/admin.css">
+                <AnchorPane layoutX="631.0" layoutY="10.0" prefHeight="135.0" prefWidth="135.0" style="-fx-background-color: white;" styleClass="shadow" stylesheets="@../css/admin.css">
                <children>
-                  <ImageView fx:id="img" fitHeight="152.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img" fitHeight="125.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
                </children></AnchorPane>
                 <Button fx:id="btnImporImg" layoutX="631.0" layoutY="175.0" mnemonicParsing="false" onAction="#importImage" prefHeight="40.0" prefWidth="154.0" styleClass="secondary_button" stylesheets="@../css/admin.css" text="Chọn ảnh từ thư viện" AnchorPane.bottomAnchor="30.0" />
                 <Button fx:id="btnAdd" layoutX="31.0" layoutY="242.0" mnemonicParsing="false" onAction="#addSP" prefHeight="40.0" prefWidth="100.0" styleClass="secondary_button" stylesheets="@../css/admin.css" text="Thêm" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="31.0" />

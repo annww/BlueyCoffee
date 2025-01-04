@@ -230,7 +230,7 @@ public class SanPhamController implements Initializable {
     File file = openFile.showOpenDialog(sanPham.getScene().getWindow());
     if (file != null) {
       Current_data.path = file.getAbsolutePath();
-      Image imgage = new Image(file.toURI().toString(), 113, 125, false, true);
+      Image imgage = new Image(file.toURI().toString(), 125, 125, false, true);
       img.setImage(imgage);
     }
   }

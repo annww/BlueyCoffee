@@ -50,7 +50,6 @@ public class cardProductController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-//    setQuantity();
   }
 
   public void setData(SanPham sanPham, BanHangController banHang) {
@@ -76,11 +75,10 @@ public class cardProductController implements Initializable {
   public void addBtn(javafx.scene.input.MouseEvent mouseEvent) {
     boolean exists = false;
 
-    // Kiểm tra danh sách xem mã sản phẩm đã tồn tại hay chưa
     for (CTHD cthd : BanHangController.cthds) {
       if (sanPham.getMaSP().equals(cthd.getMaSP())) {
-        exists = true; // Đánh dấu là đã tồn tại
-        break; // Thoát khỏi vòng lặp vì không cần kiểm tra thêm
+        exists = true;
+        break;
       }
     }
     if (!exists) {

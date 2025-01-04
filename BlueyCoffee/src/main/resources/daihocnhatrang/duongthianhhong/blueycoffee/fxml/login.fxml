@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -17,14 +16,6 @@
             <ImageView fitHeight="600.0" fitWidth="302.0" layoutY="1.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.17739868164062">
               <Image url="@../img/bluey.jpg" />
             </ImageView>
-            <Text fill="#1977d1" layoutX="81.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tạo tài khoản mới">
-               <font>
-                  <Font name="System Bold Italic" size="16.0" />
-               </font>
-            </Text>
-      
-                <!-- Nút hành động -->
-          <Button fx:id="btnSignUp" layoutX="59.0" layoutY="508.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="182.0" style="-fx-background-radius: 15;" styleClass="secondary_button" stylesheets="@../css/admin.css" text="Đăng ký" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="319.0" layoutY="17.0" prefHeight="600.0" prefWidth="282.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -43,7 +34,7 @@
             </font>
           </Text>
           <PasswordField fx:id="pass" layoutX="142.0" layoutY="285.0" prefHeight="30.0" prefWidth="147.0" style="-fx-background-radius: 10; -fx-padding: 7;" />
-          <Button fx:id="btnlogin" layoutX="96.0" layoutY="386.0" mnemonicParsing="false" onAction="#Login" prefHeight="42.0" prefWidth="147.0" style="-fx-background-radius: 15;" styleClass="secondary_button" stylesheets="@../css/admin.css" text="Đăng nhập" />
+          <Button fx:id="btnlogin" layoutX="96.0" layoutY="350.0" mnemonicParsing="false" onAction="#Login" prefHeight="42.0" prefWidth="147.0" style="-fx-background-radius: 15;" styleClass="secondary_button" stylesheets="@../css/admin.css" text="Đăng nhập" />
       
           <!-- Thông báo lỗi -->
           <Text fx:id="errorMessage" fill="red" text=" " visible="false">
@@ -51,7 +42,6 @@
               <Font size="14.0" />
             </font>
           </Text>
-            <Hyperlink fx:id="forgetPass" layoutX="196.0" layoutY="329.0" text="Quên mật khẩu?" />
       
                 <!-- Label và trường nhập liệu -->
           <Text fill="#1977d1" layoutX="16.0" layoutY="255.0" text="Tên đăng nhập">

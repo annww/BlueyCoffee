@@ -77,14 +77,12 @@ public class BanHangController implements Initializable {
 
   private HashMap<String, String> loaiSPs = new HashMap<>();
   private PreparedStatement prepare;
-  private Statement statement;
   private Connection conn;
   private ResultSet result;
   private ObservableList<SanPham> cardList = FXCollections.observableArrayList();
   public static List<CTHD> cthds = new ArrayList<>();
   private ObservableList<CTHD> cthdList = FXCollections.observableArrayList();
   private String[] loaiTT = new String[]{"Tiền mặt", "Chuyển khoản"};
-  private Alert alert;
   private String maHD;
 
   @Override
@@ -297,12 +295,12 @@ public class BanHangController implements Initializable {
       preparedStatement.setString(1, String.valueOf(currentDate));
       try (ResultSet resultSet = preparedStatement.executeQuery()) {
         if (!resultSet.next()) {
-          return maHD + "0001";
+          return maHD + "001";
         }
         String lastHD = resultSet.getString("maHD");
         System.out.println("Mã lớn nhất: " + lastHD);
         int number = Integer.parseInt(lastHD.substring(maHD.length()));
-        return maHD + String.format("%04d", number + 1);
+        return maHD + String.format("%03d", number + 1);
       }
     } catch (SQLException e) {
       throw new RuntimeException(e);

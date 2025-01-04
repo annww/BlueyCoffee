@@ -36,13 +36,13 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
                 </TableView>
-                <Text layoutX="86.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="DANH SÁCH NHÂN VIÊN" textAlignment="CENTER" wrappingWidth="219.8800244140625" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-                <Text layoutX="146.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="BLUEY COFFEE" textAlignment="CENTER" wrappingWidth="98.28" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="19.0" />
+                <Text fill="#62a2cf" layoutX="11.6" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="DANH SÁCH NHÂN VIÊN" textAlignment="CENTER" wrappingWidth="219.8800244140625" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="141.99999999999994" />
+                <Text fill="#62a2cf" layoutX="56.4" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="BLUEY COFFEE" textAlignment="CENTER" wrappingWidth="98.28" AnchorPane.leftAnchor="56.4" AnchorPane.rightAnchor="221.60002441406235" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="526.4" layoutY="15.0" prefHeight="580.0" prefWidth="439.0" styleClass="shadow" stylesheets="@../css/admin.css" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
             <children>
-                <AnchorPane layoutX="81.0" layoutY="24.0" prefHeight="142.0" prefWidth="144.0">
+                <AnchorPane layoutX="139.0" layoutY="24.0" prefHeight="142.0" prefWidth="144.0" AnchorPane.leftAnchor="139.0" AnchorPane.rightAnchor="128.2">
                     <children>
                         <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.199999999999989" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.199999999999989" AnchorPane.topAnchor="11.0">
                             <image>
@@ -51,7 +51,7 @@
                         </ImageView>
                     </children>
                 </AnchorPane>
-                <Button fx:id="btnChangeImg" layoutX="138.0" layoutY="196.0" mnemonicParsing="false" onAction="#importImage" styleClass="secondary_button" text="Đổi ảnh" />
+                <Button fx:id="btnChangeImg" layoutX="191.0" layoutY="196.0" mnemonicParsing="false" onAction="#importImage" styleClass="secondary_button" text="Đổi ảnh" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="180.20000000000005" />
                 <Text layoutX="17.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mã nhân viên:" AnchorPane.leftAnchor="15.0" />
                 <Text layoutX="13.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tên nhân viên:" AnchorPane.leftAnchor="15.0" />
                 <Text layoutX="15.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Giới tính:" AnchorPane.leftAnchor="15.0" />
@@ -62,10 +62,10 @@
                 <Text layoutX="16.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Số điện thoại:" AnchorPane.leftAnchor="16.0" />
                 <Text layoutX="16.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chức vụ:" AnchorPane.leftAnchor="16.0" />
                 <Text layoutX="15.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trạng thái:" AnchorPane.leftAnchor="15.0" />
-                <Button fx:id="btnAdd" layoutX="80.0" layoutY="536.0" mnemonicParsing="false" onAction="#addNV" styleClass="secondary_button" text="Thêm" AnchorPane.bottomAnchor="14.399999999999864" />
-                <Button fx:id="btnUpdate" layoutX="149.0" layoutY="536.0" mnemonicParsing="false" onAction="#updateNV" styleClass="secondary_button" text="Cập nhật" AnchorPane.bottomAnchor="14.399999999999864" />
-                <Button fx:id="btnEdit" layoutX="245.0" layoutY="536.0" mnemonicParsing="false" onAction="#reloadNV" styleClass="secondary_button" text="Hủy" AnchorPane.bottomAnchor="14.399999999999864" />
-                <Button fx:id="btnDelete" layoutX="316.0" layoutY="536.0" mnemonicParsing="false" onAction="#deleteNV" styleClass="secondary_button" text="Xóa" AnchorPane.bottomAnchor="14.399999999999864" />
+                <Button fx:id="btnAdd" layoutX="80.0" layoutY="634.0" mnemonicParsing="false" onAction="#addNV" styleClass="secondary_button" text="Thêm" />
+                <Button fx:id="btnUpdate" layoutX="149.0" layoutY="634.0" mnemonicParsing="false" onAction="#updateNV" styleClass="secondary_button" text="Cập nhật" />
+                <Button fx:id="btnEdit" layoutX="245.0" layoutY="634.0" mnemonicParsing="false" onAction="#reloadNV" styleClass="secondary_button" text="Hủy" />
+                <Button fx:id="btnDelete" layoutX="316.0" layoutY="634.0" mnemonicParsing="false" onAction="#deleteNV" styleClass="secondary_button" text="Xóa" />
                 <TextField fx:id="txtMaNV" layoutX="110.4" layoutY="241.0" prefHeight="28.0" prefWidth="314.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="15.0" />
                 <TextField fx:id="txtTenNV" layoutX="111.0" layoutY="284.0" prefHeight="28.0" prefWidth="260.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="15.0" />
                 <TextField fx:id="txtEmail" layoutX="112.0" layoutY="395.0" prefHeight="28.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="15.0" />

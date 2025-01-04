@@ -15,6 +15,15 @@ public class CTHD {
     updateThanhTien();  // Tính thanh tiền khi khởi tạo
   }
 
+  public CTHD(String maSP, String tenSP, int donGia, int soLuong) {
+    this.maSP = maSP;
+    this.tenSP = tenSP;
+    this.donGia = donGia;
+    this.soLuong = soLuong;
+    this.ghiChu = "";  // Khởi tạo ghi chú mặc định là chuỗi rỗng
+    updateThanhTien();
+  }
+
   public CTHD(String maSP, String tenSP, String tenSP1, int donGia, int soLuong) {
     this.maSP = maSP;
     this.tenSP = tenSP;
